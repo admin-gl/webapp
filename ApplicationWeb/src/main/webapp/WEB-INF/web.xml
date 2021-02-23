@@ -24,4 +24,14 @@
         <url-pattern>/inscription</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>News</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.News</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>News</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+
 </web-app>
