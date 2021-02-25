@@ -4,8 +4,6 @@
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
 <html>
-
-
     <head>
         <title>Home</title>
     </head>
@@ -15,8 +13,18 @@
             <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="index.jsp">Accueil</a>
             <a href="news">Nouveautés</a>
+            <%
+                if(request.getSession().getAttribute("email")!=null){
+            %>
+            <a class="sign" href="logout">Déconnection</a>
+            <%
+            } else {
+            %>
             <a class="sign" href="inscription">Inscription</a>
-            <a class="sign" href="#connexion">Connexion</a>
+            <a class="sign" href="login">Connection</a>
+            <%
+                }
+            %>
         </div>
 
         <h1>L'illimité, à <br>&emsp; portée de clic</h1>
@@ -27,7 +35,6 @@
         <script src="particles.js-master/app.js"></script>
 
     <br/>
-        <a href="accueil-servlet">Accueil Servlet</a>
 
         <div style="padding-bottom:300px"></div>
         <div class="bottom-nav">

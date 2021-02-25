@@ -1,7 +1,7 @@
 package com.voidapp.ApplicationWeb.compteUtilisateur;
 
 
-import com.voidapp.ApplicationWeb.bdd.AjoutBdd;
+import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 
 import java.util.Date;
 
@@ -135,8 +135,7 @@ public class Utilisateur {
     }
 
     public String AddUser(){
-        AjoutBdd requete = new AjoutBdd();
-        String reponse = requete.AjoutUtilisateur(this);
+        String reponse = AccesBdd.AjoutUtilisateur(this);
         setMaxId(maxId+1);
         return reponse;
     }
