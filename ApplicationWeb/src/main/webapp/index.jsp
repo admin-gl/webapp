@@ -4,8 +4,6 @@
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
 <html>
-
-
     <head>
         <title>Home</title>
     </head>
@@ -28,8 +26,7 @@
             <%
                 }
             %>
-
-
+            
         </div>
 
         <h1>L'illimité, à <br>&emsp; portée de clic</h1>
@@ -40,7 +37,6 @@
         <script src="particles.js-master/app.js"></script>
 
     <br/>
-        <a href="accueil-servlet">Accueil Servlet</a>
 
         <div style="padding-bottom:300px"></div>
         <div class="bottom-nav">

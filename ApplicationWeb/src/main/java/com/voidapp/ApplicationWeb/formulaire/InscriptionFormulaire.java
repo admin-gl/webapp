@@ -1,4 +1,5 @@
 package com.voidapp.ApplicationWeb.formulaire;
+import com.voidapp.ApplicationWeb.bdd.Hasher;
 import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public final class InscriptionFormulaire {
     private static final String CHAMP_ADRESSE = "adresse";
 
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>();
+    private final Map<String, String> erreurs = new HashMap<String, String>();
 
     public String getResultat() {
         return resultat;
@@ -44,11 +45,11 @@ public final class InscriptionFormulaire {
 
         try {
             validationMotsDePasse( motDePasse, confirmation );
+            utilisateur.setMdp(Hasher.encode(motDePasse));
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
             setErreur( CHAMP_CONF, null );
         }
-        utilisateur.setMdp( motDePasse );
 
         try {
             validationNonVide("Nom", nom );
@@ -86,11 +87,11 @@ public final class InscriptionFormulaire {
      */
     private void validationEmail( String email ) throws Exception {
         if ( email != null && email.trim().length() != 0 ) {
-            if ( !email.matches("(.*)@(.*)")) {
+            if ( !email.matches("/^([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})/i")) {
                 throw new Exception( "Merci de saisir une adresse mail valide." );
             }
         } else {
-            throw new Exception( "Merci de saisir une adresse mail." );
+            throw new Exception( "Merci de saisir une adresse mail valide." );
         }
     }
 
@@ -113,7 +114,7 @@ public final class InscriptionFormulaire {
      * Valide le nom d'utilisateur saisi.
      */
     private void validationNonVide( String champ,String valeurchamp ) throws Exception {
-        if ( valeurchamp == "") {
+        if (valeurchamp == null) {
             throw new Exception( "Le champ "+ champ + " doit contenir au moins 1 caractère." );
         }
     }
