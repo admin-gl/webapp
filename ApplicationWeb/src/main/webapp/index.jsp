@@ -18,18 +18,20 @@
                 if(request.getSession().getAttribute("email")!=null){
             %>
             <a class="sign" href="logout">Déconnection</a>
+            <a class="sign" href="profile">Profil</a>
             <%
                 } else {
             %>
             <a class="sign" href="inscription">Inscription</a>
-            <a class="sign" href="form.jsp">Connexion</a>
+            <a class="sign" href="login">Connexion</a>
             <%
                 }
             %>
-            
+
         </div>
 
         <h1>L'illimité, à <br>&emsp; portée de clic</h1>
+
 
         <div id="particles-js"></div>
 

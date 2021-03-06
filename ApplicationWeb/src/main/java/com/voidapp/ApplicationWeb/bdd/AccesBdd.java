@@ -14,6 +14,17 @@ public class AccesBdd {
     private static ResourceBundle properties;
     private static String resourceBundle = "config";
 
+    public static Connection Connect() throws SQLException, ClassNotFoundException {
+        properties = ResourceBundle.getBundle(resourceBundle);
+            Class.forName(properties.getString("DB_DRIVER"));
+            Connection connexion = null;
+            String url = properties.getString("JDBC_URL");
+            String utilisateur = properties.getString("DB_LOGIN");
+            String motDePasse = properties.getString("DB_PASSWORD");
+            connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
+            return connexion;
+    }
+
     public static String AjoutUtilisateur( Utilisateur user ) {
         String message="";
         properties = ResourceBundle.getBundle(resourceBundle);
@@ -68,20 +79,10 @@ public class AccesBdd {
     }
 
     public static boolean checkUser(String email,String mdp) {
-        properties = ResourceBundle.getBundle(resourceBundle);
         boolean st =false;
         try {
-
-            Class.forName(properties.getString("DB_DRIVER"));
-
-            String url = properties.getString("JDBC_URL");
-            String utilisateur = properties.getString("DB_LOGIN");
-            String motDePasse = properties.getString("DB_PASSWORD");
-            Connection connexion = null;
-            Statement statement = null;
-            ResultSet resultat = null;
-            connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-            PreparedStatement ps = connexion.prepareStatement("select * from Utilisateur where email=? and mdp=?");
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select * from Utilisateur where email=? and mdp=?;");
             ps.setString(1, email);
             ps.setString(2, mdp);
             ResultSet rs =ps.executeQuery();
@@ -93,5 +94,66 @@ public class AccesBdd {
         }
         return st;
     }
+
+    public static String getLName(String email){
+        String lname = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select nom from Utilisateur where email=?;");
+            ps.setString(1, email);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                lname = rs.getString("nom");
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    return lname;
+    }
+
+    public static String getFName(String email){
+        String lname = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select prenom from Utilisateur where email=?;");
+            ps.setString(1, email);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                lname = rs.getString("prenom");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return lname;
+    }
+
+    public static void chMail(String oldemail, String newemail){
+        try {
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("update Utilisateur set email=? where email=?;");
+            ps.setString(1, newemail);
+            ps.setString(2, oldemail);
+            ps.executeUpdate();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static void chMdp(String email, String newmdp){
+        try {
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("update Utilisateur set mdp=? where email=?;");
+            ps.setString(1, Hasher.encode(newmdp));
+            ps.setString(2, "glenan.bolou@gmail.com");
+            ps.executeUpdate();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
