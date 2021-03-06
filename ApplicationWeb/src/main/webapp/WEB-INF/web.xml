@@ -23,5 +23,15 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/inscription</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+  	  <display-name>MainServletMusique</display-name>
+      <servlet-name>MainServletMusique</servlet-name>
+      <servlet-class>com.voidapp.ApplicationWeb.Musique.MainServletMusique</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>MainServletMusique</servlet-name>
+      <url-pattern>/musique</url-pattern>
+  </servlet-mapping>
 
 </web-app>
