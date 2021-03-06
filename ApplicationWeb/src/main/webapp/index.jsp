@@ -6,6 +6,7 @@
 <html>
     <head>
         <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     </head>
     <body>
 
@@ -30,7 +31,7 @@
 
         </div>
 
-        <h1>L'illimité, à <br>&emsp; portée de clic</h1>
+        <h1 style="font-size:11vw">L'illimité, à <br>&emsp; portée de clic</h1>
 
 
         <div id="particles-js"></div>
