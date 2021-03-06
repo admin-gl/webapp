@@ -1,0 +1,12 @@
+Voici comment constater les effets de ces classes Java :
+
+Dans le navigateur, taper "http://localhost:8080/JEEappPerso/musique" au minimum.
+Ceci affichera la valeur par défaut de la page d'écoute de musique. Plus tard, il faudra faire en sorte que cette page dise qu'elle 
+n'a pas retrouvé le contenu, car le contenu cherché passe par un paramètre.
+Cependant vous pouvez vous apercevoir que vous pouvez toujours cliquer sur les liens disponibles et ils affichent les pages
+qui correspondent aux musiques mentionnées.
+
+Pour accéder directement à ces musiques, tapez simplement dans le navigateur :
+"http://localhost:8080/JEEappPerso/musique?id=1" pour écouter l'énigme1 ;
+"http://localhost:8080/JEEappPerso/musique?id=2" pour écouter l'énigme2.
+Remarquer que dans le cas de l'énigme2, vous pouvez pour l'instant aussi bien rentrer n'importe quelle chaîne de caractères.
