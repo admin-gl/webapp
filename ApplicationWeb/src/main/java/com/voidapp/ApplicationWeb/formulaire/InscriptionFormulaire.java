@@ -4,6 +4,8 @@ import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public final class InscriptionFormulaire {
@@ -86,8 +88,12 @@ public final class InscriptionFormulaire {
      * Valide l'adresse mail saisie.
      */
     private void validationEmail( String email ) throws Exception {
+
+        String regex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        Pattern ptr = Pattern.compile(regex);
+        Matcher mtc = ptr.matcher(email);
         if ( email != null && email.trim().length() != 0 ) {
-            if ( !email.matches("/^([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})/i")) {
+            if (!mtc.matches()){
                 throw new Exception( "Merci de saisir une adresse mail valide." );
             }
         } else {
