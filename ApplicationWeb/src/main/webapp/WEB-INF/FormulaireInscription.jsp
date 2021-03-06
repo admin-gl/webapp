@@ -3,11 +3,12 @@
 <link href="../css/InsciptionCSS.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
 <html>
     <head>
         <meta charset="utf-8" />
         <title>Inscription</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+
     </head>
 
     <body>

@@ -74,17 +74,6 @@ div.topnav
     font-size: 20px;
 }
 
-div.bottom-nav{
-    top: 0;
-    padding: 20px;
-    background-color: black;
-    overflow: hidden;
-}
-.bottom-nav img {
-    float:left;
-    margin:-10px 0;
-}
-
 #particles-js canvas {
     display: block;
     vertical-align: bottom;
@@ -103,4 +92,18 @@ div.bottom-nav{
     z-index: -10;
     top: 0;
     left: 0
+}
+
+div.bottom-nav{
+    position: fixed;
+    bottom: 6px;
+    width: 99%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: black;
+    overflow: hidden;
+}
+.bottom-nav img {
+    float:left;
+    margin:-10px 0;
 }

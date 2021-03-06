@@ -16,12 +16,12 @@
             <%
                 if(request.getSession().getAttribute("email")!=null){
             %>
-            <a class="sign" href="logout">Déconnection</a>
+            <a class="sign" href="logout">Déconnexion</a>
             <%
             } else {
             %>
             <a class="sign" href="inscription">Inscription</a>
-            <a class="sign" href="login">Connection</a>
+            <a class="sign" href="login">Connexion</a>
             <%
                 }
             %>
@@ -34,11 +34,11 @@
         <script src="particles.js-master/particles.js"></script>
         <script src="particles.js-master/app.js"></script>
 
-    <br/>
-
-        <div style="padding-bottom:300px"></div>
         <div class="bottom-nav">
             <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
         </div>
+
     </body>
+
+
 </html>

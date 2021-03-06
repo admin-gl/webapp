@@ -35,7 +35,7 @@ public class MainServletMusique extends HttpServlet {
         
         request.setAttribute("music", music);
 		
-        String pageName="/listeningPage.jsp";
+        String pageName="/WEB-INF/listeningPage.jsp";
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
         
