@@ -3,11 +3,12 @@
 <link href="../css/InsciptionCSS.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
 <html>
     <head>
         <meta charset="utf-8" />
         <title>Inscription</title>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+
     </head>
 
     <body>
@@ -56,7 +57,7 @@
                         <span class="erreur">${formulaire.erreurs['email']}</span>
                     </div>
                     <div>
-                        <input type="text" id="adresse" name="adresse" placeholder="adresse de facturation *" value=""${Utilisateur.adressefacturation}" size="20" maxlength="60" />
+                        <input type="text" id="adresse" name="adresse" placeholder="adresse de facturation *" value="${Utilisateur.adressefacturation}" size="20" maxlength="60" />
                         <span class="erreur">${formulaire.erreurs['adresse']}</span>
                     </div>
                 </div>
