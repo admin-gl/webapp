@@ -23,5 +23,56 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/inscription</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+  	  <display-name>MainServletMusique</display-name>
+      <servlet-name>MainServletMusique</servlet-name>
+      <servlet-class>com.voidapp.ApplicationWeb.servlets.MainServletMusique</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainServletMusique</servlet-name>
+        <url-pattern>/musique</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjoutMusiqueServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.AjoutMusiqueServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AjoutMusiqueServlet</servlet-name>
+        <url-pattern>/ajout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>News</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.News</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>News</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.Login</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.Logout</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -1,10 +1,13 @@
 package com.voidapp.ApplicationWeb.formulaire;
+import com.voidapp.ApplicationWeb.bdd.Hasher;
 import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public final class InscriptionFormulaire {
@@ -18,7 +21,7 @@ public final class InscriptionFormulaire {
     private static final String CHAMP_CIVILITE = "civilite";
 
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>();
+    private final Map<String, String> erreurs = new HashMap<String, String>();
 
     public String getResultat() {
         return resultat;
@@ -55,11 +58,11 @@ public final class InscriptionFormulaire {
 
         try {
             validationMotsDePasse( motDePasse, confirmation );
+            utilisateur.setMdp(Hasher.encode(motDePasse));
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
             setErreur( CHAMP_CONF, null );
         }
-        utilisateur.setMdp( motDePasse );
 
         try {
             validationNonVide("Nom", nom );
@@ -97,12 +100,16 @@ public final class InscriptionFormulaire {
      * Valide l'adresse mail saisie.
      */
     private void validationEmail( String email ) throws Exception {
+
+        String regex = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+        Pattern ptr = Pattern.compile(regex);
+        Matcher mtc = ptr.matcher(email);
         if ( email != null && email.trim().length() != 0 ) {
-            if ( !email.matches("(.*)@(.*)")) {
+            if (!mtc.matches()){
                 throw new Exception( "Merci de saisir une adresse mail valide." );
             }
         } else {
-            throw new Exception( "Merci de saisir une adresse mail." );
+            throw new Exception( "Merci de saisir une adresse mail valide." );
         }
     }
 
@@ -125,7 +132,7 @@ public final class InscriptionFormulaire {
      * Valide le nom d'utilisateur saisi.
      */
     private void validationNonVide( String champ,String valeurchamp ) throws Exception {
-        if ( valeurchamp == "") {
+        if (valeurchamp == null) {
             throw new Exception( "Le champ "+ champ + " doit contenir au moins 1 caractère." );
         }
     }
