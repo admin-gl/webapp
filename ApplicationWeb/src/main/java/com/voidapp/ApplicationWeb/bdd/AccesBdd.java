@@ -184,20 +184,19 @@ public class AccesBdd {
                     outputMus.write(buffer);
                 }
                 if(inputImg != null){
-                    buffer = new byte[1024];
-                    while (inputImg.read(buffer) > 0) {
-                        outputImg.write(buffer);
+                    byte[] bufferImg = new byte[1024];
+                    while (inputImg.read(bufferImg) > 0) {
+                        outputImg.write(bufferImg);
                     }
                 }
                 if(inputImg == null) {
                     System.out.println("pas d'image");
-                    fin = new Musique("" + id,nom,format,artiste, mus.getPath());
+                    fin = new Musique("" + id,nom,format,artiste, "music/music.wav");
                 } else {
-                    fin = new Musique("" + id,nom,format,artiste, mus.getPath(), img.getPath());
+                    fin = new Musique("" + id,nom,format,artiste, "music/music.wav", "music/img.png");
                 }
             }
             rs.close();
-
             return fin;
         } catch (SQLException | IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());

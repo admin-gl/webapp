@@ -26,14 +26,14 @@
 	<body onload="init()">
 
 		<div class="topnav">
-			<img src="<%=imgPath%>" alt=" " style="width:70px;height:70px;">
+			<img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
 			<a href="../index.jsp">Accueil</a>
 			<a href="news">Nouveautés</a>
 			<a class="sign" href="logout">Déconnexion</a>
 		</div>
 
 		<div class="player">
-			<img src="../logos/planet_void_white_alpha.png" alt=" ">
+			<img src="<%=imgPath%>" alt=" ">
 
 			<h3 style="color:white;"><%= title %></h3>
 			<h5 style="color:white"><%= artiste%></h5>
@@ -57,7 +57,7 @@
 		</div>
 
 		<a href="musique?id=1">enigme_1</a><br>
-		<a href="musique?id=coucou">enigme_2</a>
+		<a href="musique?id=2">enigme_2</a>
 
 		<div id="particles-js"></div>
 

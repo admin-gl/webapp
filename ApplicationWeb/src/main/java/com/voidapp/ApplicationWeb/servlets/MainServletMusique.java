@@ -15,31 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class MainServletMusique extends HttpServlet {
+
+	private final String pageName="/WEB-INF/listeningPage.jsp";
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
-		
-		List<Musique> listMusic = new ArrayList<Musique>();
+
 
 		Musique music = new Musique();  // la musique qui sera effectivement transmise au client
-		Musique enigme1 = AccesBdd.readMusic(1, new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
-		Musique enigme2 = AccesBdd.readMusic(2, new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
 
-		listMusic.add(enigme1);
-		listMusic.add(enigme2);
-		
 		String id = request.getParameter("id");
 		
 		if (id != null && !id.contentEquals("")) {
-			if (id.contentEquals("1")) {
-				music = enigme1;
-			} else {
-				music = enigme2;
-			}
+			music = AccesBdd.readMusic(Integer.parseInt(id), new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
 		}
-        
         request.setAttribute("music", music);
-		
-        String pageName="/WEB-INF/listeningPage.jsp";
+
+
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
         
