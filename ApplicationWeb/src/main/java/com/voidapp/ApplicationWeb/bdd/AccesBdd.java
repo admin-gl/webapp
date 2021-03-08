@@ -5,14 +5,12 @@ import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
 import java.io.*;
 import java.sql.*;
-import java.util.Arrays;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AccesBdd {
 
     private static ResourceBundle properties;
-    private static String resourceBundle = "config";
+    private static final String resourceBundle = "config";
 
     public static String AjoutUtilisateur( Utilisateur user ) {
         String message="";
@@ -29,40 +27,17 @@ public class AccesBdd {
         String url = properties.getString("JDBC_URL");
         String utilisateur = properties.getString("DB_LOGIN");
         String motDePasse = properties.getString("DB_PASSWORD");
-        Connection connexion = null;
-        Statement statement = null;
-        ResultSet resultat = null;
-        try {
-            connexion = DriverManager.getConnection( url, utilisateur, motDePasse );
-            statement = connexion.createStatement();
+        try (Connection connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
+             Statement statement = connexion.createStatement()) {
 
             /* Exécution d'une requête d'écriture*/
 
 
-            String requete ="INSERT INTO Utilisateur (email,prenom,nom,adresse,mdp) VALUES ('"+user.getMail()+"','"+user.getPrenom()+"','"+user.getNom()+"','"+user.getAdressefacturation()+"','"+user.getMdp()+"');";
-            int statut = statement.executeUpdate(requete);
+            String requete = "INSERT INTO Utilisateur (email,prenom,nom,adresse,mdp) VALUES ('" + user.getMail() + "','" + user.getPrenom() + "','" + user.getNom() + "','" + user.getAdressefacturation() + "','" + user.getMdp() + "');";
+            statement.executeUpdate(requete);
 
-        } catch ( SQLException e ) {
-            message=message+"erreur dans la requete";
-        } finally {
-            if ( resultat != null ) {
-                try {
-                    resultat.close();
-                } catch ( SQLException ignore ) {
-                }
-            }
-            if ( statement != null ) {
-                try {
-                    statement.close();
-                } catch ( SQLException ignore ) {
-                }
-            }
-            if ( connexion != null ) {
-                try {
-                    connexion.close();
-                } catch ( SQLException ignore ) {
-                }
-            }
+        } catch (SQLException e) {
+            message = message + "erreur dans la requete";
         }
         return message;
     }
@@ -84,6 +59,7 @@ public class AccesBdd {
             ResultSet rs = ps.executeQuery();
             st = rs.next();
             rs.close();
+            connexion.close();
 
         }
         catch(Exception e) {
@@ -112,6 +88,8 @@ public class AccesBdd {
             pstmt.executeUpdate();
 
             writeBlob(conn, absoluteMusPath, absoluteImgPath);
+
+            conn.close();
 
         } catch (SQLException | FileNotFoundException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -190,13 +168,18 @@ public class AccesBdd {
                     }
                 }
                 if(inputImg == null) {
-                    System.out.println("pas d'image");
                     fin = new Musique("" + id,nom,format,artiste, "music/music.wav");
                 } else {
                     fin = new Musique("" + id,nom,format,artiste, "music/music.wav", "music/img.png");
+                    inputImg.close();
                 }
+                inputMus.close();
+
             }
             rs.close();
+            outputImg.close();
+            outputMus.close();
+            conn.close();
             return fin;
         } catch (SQLException | IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
@@ -212,15 +195,6 @@ public class AccesBdd {
 
         return null;
 
-    }
-
-/*    public static void main(String[] args) {
-        writeMusic("enigme 1", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_1.wav", null);
-        writeMusic("enigme 2", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_2.wav", "C:\\Users\\kilia\\Pictures\\musique.png");
-    }*/
-
-    public static void main(String[] args) {
-       readMusic(1, new File("C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\target\\ApplicationWeb-1.0-SNAPSHOT\\music\\music.wav"), new File("C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\target\\ApplicationWeb-1.0-SNAPSHOT\\music\\img.png"));
     }
 
 }

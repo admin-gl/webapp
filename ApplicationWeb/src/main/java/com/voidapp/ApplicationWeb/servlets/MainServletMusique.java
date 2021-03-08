@@ -26,7 +26,20 @@ public class MainServletMusique extends HttpServlet {
 		String id = request.getParameter("id");
 		
 		if (id != null && !id.contentEquals("")) {
-			music = AccesBdd.readMusic(Integer.parseInt(id), new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
+			File musFile = new File(getServletContext().getRealPath("/") + "/music/music.wav");
+			File imgFile = new File(getServletContext().getRealPath("/") + "music/img.png");
+			try {
+				if (!musFile.exists()) {
+					musFile.createNewFile();
+				}
+
+				if(!imgFile.exists()){
+					imgFile.createNewFile();
+				}
+				music = AccesBdd.readMusic(Integer.parseInt(id), musFile, imgFile);
+			} catch (IOException e ){
+				e.printStackTrace();
+			}
 		}
         request.setAttribute("music", music);
 
