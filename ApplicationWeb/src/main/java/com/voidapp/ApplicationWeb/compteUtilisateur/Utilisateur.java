@@ -14,7 +14,7 @@ public class Utilisateur {
     Statut statut;
     String nom;
     String prenom;
-    Date dateadhesion;
+    java.sql.Date dateadhesion;
     String adressefacturation;
     Genre genrepref;
 
@@ -29,7 +29,7 @@ public class Utilisateur {
         this.statut = Statut.Utilisateur;
         this.nom = nom;
         this.prenom = prenom;
-        this.dateadhesion =new Date();
+        this.dateadhesion =new java.sql.Date(new Date().getTime());
         this.adressefacturation = adressefacturation;
         this.genrepref = genrepref;
     }
@@ -94,7 +94,7 @@ public class Utilisateur {
         return dateadhesion;
     }
 
-    public void setDateadhesion(Date dateadhesion) {
+    public void setDateadhesion(java.sql.Date dateadhesion) {
         this.dateadhesion = dateadhesion;
     }
 
@@ -127,7 +127,7 @@ public class Utilisateur {
     }
 
     public enum Civilite {
-        MADAME, MADEMOISELLE, MONSIEUR
+        madame, monsieur
     }
 
     public enum Genre {

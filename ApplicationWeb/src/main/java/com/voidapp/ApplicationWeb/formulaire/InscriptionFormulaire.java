@@ -1,6 +1,8 @@
 package com.voidapp.ApplicationWeb.formulaire;
 import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ public final class InscriptionFormulaire {
     private static final String CHAMP_NOM    = "nom";
     private static final String CHAMP_PRENOM = "prenom";
     private static final String CHAMP_ADRESSE = "adresse";
+    private static final String CHAMP_CIVILITE = "civilite";
 
     private String resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>();
@@ -32,8 +35,16 @@ public final class InscriptionFormulaire {
         String nom = getValeurChamp( request, CHAMP_NOM );
         String prenom = getValeurChamp( request, CHAMP_PRENOM );
         String adresse = getValeurChamp( request, CHAMP_ADRESSE );
-
+        String civilite = request.getParameter(CHAMP_CIVILITE);
         Utilisateur utilisateur = new Utilisateur();
+
+        utilisateur.setDateadhesion(new java.sql.Date(new Date().getTime()));
+
+        if(civilite.equals("monsieur")){
+            utilisateur.setCivilite(Utilisateur.Civilite.monsieur);
+        }else{
+            utilisateur.setCivilite(Utilisateur.Civilite.madame);
+        }
 
         try {
             validationEmail( email );
@@ -69,6 +80,7 @@ public final class InscriptionFormulaire {
         } catch ( Exception e ) {
             setErreur( CHAMP_ADRESSE, e.getMessage() );
         }
+        adresse.replaceAll("'", "\'");
         utilisateur.setAdressefacturation(adresse);
 
         if ( erreurs.isEmpty() ) {
