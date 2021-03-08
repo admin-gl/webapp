@@ -33,8 +33,8 @@ public class AccesBdd {
             /* Exécution d'une requête d'écriture*/
 
 
-            String requete = "INSERT INTO Utilisateur (email,prenom,nom,adresse,mdp) VALUES ('" + user.getMail() + "','" + user.getPrenom() + "','" + user.getNom() + "','" + user.getAdressefacturation() + "','" + user.getMdp() + "');";
-            statement.executeUpdate(requete);
+            String requete="INSERT INTO Utilisateur (email,prenom,nom,adresse,mdp,civilite,estadmin,dateadhesion) VALUES ('"+user.getMail()+"','"+user.getPrenom()+"','"+user.getNom()+"','"+user.getAdressefacturation()+"','"+user.getMdp()+"','"+user.getCivilite()+"',false,'"+user.getDateadhesion()+"');";
+            int statut = statement.executeUpdate(requete);
 
         } catch (SQLException e) {
             message = message + "erreur dans la requete";
