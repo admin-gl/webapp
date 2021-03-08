@@ -7,7 +7,6 @@ function init(){
     const likeIconContainer = document.getElementById('like-icon');
     let playState = 'play';
     let muteState = 'unmute';
-    let likeState = "dislike";
 
     const playAnimation = lottie.loadAnimation({
         container: playIconContainer,
@@ -25,16 +24,6 @@ function init(){
         loop: false,
         autoplay: false,
         name: "Mute Animation",
-    });
-
-
-    const likeAnimation = lottie.loadAnimation({
-        container: muteIconContainer,
-        path : 'https://maxst.icons8.com/vue-static/landings/animated-icons/icons/heart/heart.json',
-        renderer: 'svg',
-        loop: false,
-        autoplay: false,
-        name: "Like Animation",
     });
 
     playAnimation.goToAndStop(14, true);
@@ -63,15 +52,6 @@ function init(){
             audio.muted = false;
             muteState = 'unmute';
         }
-    });
-
-    likeIconContainer.addEventListener('click', () => {
-       if(likeState === 'dislike'){
-           likeAnimation.playSegments([0, 15], true);
-           likeState = 'like';
-       } else {
-           likeAnimation.playSegments([15, 30], true);
-       }
     });
 
     const showRangeProgress = (rangeInput) => {

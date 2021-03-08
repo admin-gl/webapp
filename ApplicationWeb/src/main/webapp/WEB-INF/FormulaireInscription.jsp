@@ -57,7 +57,7 @@
                         <span class="erreur">${formulaire.erreurs['email']}</span>
                     </div>
                     <div>
-                        <input type="text" id="adresse" name="adresse" placeholder="adresse de facturation *" value=""${Utilisateur.adressefacturation}" size="20" maxlength="60" />
+                        <input type="text" id="adresse" name="adresse" placeholder="adresse de facturation *" value="${Utilisateur.adressefacturation}" size="20" maxlength="60" />
                         <span class="erreur">${formulaire.erreurs['adresse']}</span>
                     </div>
                 </div>

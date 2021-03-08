@@ -1,5 +1,9 @@
-package com.voidapp.ApplicationWeb.Musique;
+package com.voidapp.ApplicationWeb.servlets;
 
+import com.voidapp.ApplicationWeb.Musique.Musique;
+import com.voidapp.ApplicationWeb.bdd.AccesBdd;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +19,11 @@ public class MainServletMusique extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
 		
 		List<Musique> listMusic = new ArrayList<Musique>();
-		
+
 		Musique music = new Musique();  // la musique qui sera effectivement transmise au client
-		Musique enigme1 = new Musique("1", "enigme_1", "wav", "Kilian", "music/enigme_1.wav");
-		Musique enigme2 = new Musique("2", "enigme_2", "wav", "Kilian", "music/enigme_2.wav");
-		
+		Musique enigme1 = AccesBdd.readMusic(1, new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
+		Musique enigme2 = AccesBdd.readMusic(2, new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
+
 		listMusic.add(enigme1);
 		listMusic.add(enigme2);
 		
@@ -44,17 +48,13 @@ public class MainServletMusique extends HttpServlet {
 
               rd.forward(request, response);
 
-        } catch (ServletException e) {
-
-              e.printStackTrace();
-
-        } catch (IOException e) {
+        } catch (ServletException | IOException e) {
 
               e.printStackTrace();
 
         }
-        
-    }
+
+	}
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);

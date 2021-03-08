@@ -42,5 +42,7 @@
     <orderEntry type="library" name="zxcvbn" level="application" />
     <orderEntry type="library" name="lottie-web" level="application" />
     <orderEntry type="library" name="zxcvbn" level="application" />
+    <orderEntry type="library" name="font-awesome" level="application" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.21" level="project" />
   </component>
 </module>

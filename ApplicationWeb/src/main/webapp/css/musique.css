@@ -1,5 +1,6 @@
 body {
     background-color:#150a11;
+    font-family: Rubik;
 }
 .css-selector {
     font-family: 'Rubik';
@@ -115,37 +116,93 @@ button {
     margin-left: calc(50% - 275px);
     margin-right: calc(50% - 275px);
     display: flex;
-    justify-content: space-evenly;
-    align-content: center;
+    justify-content: center;
 }
 
 #audio-player-container {
     --seek-before-width: 0%;
     --volume-before-width: 100%;
     --buffered-width: 0%;
-    position: relative;
     width: 95%;
-    max-width: 500px;
     height: 132px;
-}
-
-
-#audio-player-container::before {
-    position: absolute;
-    content: '';
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    left: -2px;
-    top: -2px;
-    z-index: -1;
+    max-width: 500px;
+    flex-shrink: 3;
 }
 
 #play-icon {
     margin: 20px 2.5% 10px 2.5%;
 }
+
+.like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+}
+
+.like-btn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all 0.5s;
+    opacity: 0;
+    z-index: 2;
+}
+
+
+.fa-heart{
+    position: absolute;
+    font-size: 10rem;
+    -webkit-text-stroke: 2px rgb(127, 0, 181);
+    color: rgba(0,0,0,0);
+    transition: all ease-in-out;
+}
+
+.like-btn:hover + .fa-heart{
+    color: rgba(84, 0, 181, 0.2);
+    -webkit-text-stroke: 2px rgb(127, 0, 181);
+}
+
+.like-btn:checked + .fa-heart{
+    color: rgb(127, 0, 181);
+    -webkit-text-stroke: 1px rgb(127, 0, 181);
+    animation: .5s linear burst;
+}
+
+@keyframes burst{
+    0%,10%{
+        transform: scale(1);
+        opacity: .5;
+        color:lavender;
+    }
+    45%{
+        transform: scale(.2) rotate(30deg);
+        opacity: .75;
+    }
+    50%{
+        transform: scale(2) rotate(-37.5deg);
+        opacity: 1;
+        color: rgb(127, 0, 181);
+        text-shadow: 2px 2px 6px rgba(84, 0, 181, 0.2);
+    }
+    90%,95%{
+        transform: scale(1) rotate(10deg);
+        text-shadow: none;
+    }
+    100% {
+        transform: rotate(-2.5deg);
+    }
+
+}
+
 path {
     stroke: rgb(127, 0, 181);
 }
+
 .time {
     display: inline-block;
     width: 37px;

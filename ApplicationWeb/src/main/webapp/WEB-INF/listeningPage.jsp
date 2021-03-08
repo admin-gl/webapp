@@ -4,14 +4,18 @@
 	Musique music = (Musique) request.getAttribute("music");
 	String title = music.getTitle();
 	String format = music.getFormat();
-	String path = music.getPath();
+	String musPath = music.getMusPath();
 	String artiste = music.getAuthor();
+	String imgPath = music.getImgPath();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <link href="../css/musique.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
 	  href="https://fonts.googleapis.com/css?family=Rubik">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <script src="../js-player/lottie.js" type="text/javascript"></script>
 <script src="../js-player/player.js"></script>
 <html>
@@ -22,7 +26,7 @@
 	<body onload="init()">
 
 		<div class="topnav">
-			<img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+			<img src="<%=imgPath%>" alt=" " style="width:70px;height:70px;">
 			<a href="../index.jsp">Accueil</a>
 			<a href="news">Nouveautés</a>
 			<a class="sign" href="logout">Déconnexion</a>
@@ -35,7 +39,7 @@
 			<h5 style="color:white"><%= artiste%></h5>
 			<div id="audio-like-player-container">
 				<div id="audio-player-container">
-					<audio id="audio" src=<%=path%> type="audio/<%=format%>" preload="auto"></audio>
+					<audio id="audio" src=<%=musPath%> type="audio/<%=format%>" preload="auto"></audio>
 					<button id="play-icon"></button>
 					<span id="current-time" class="time">0:00</span>
 					<input type="range" id="seek-slider" max="100" value="0">
@@ -44,7 +48,11 @@
 					<input type="range" id="volume-slider" max="100" value="100">
 					<button id="mute-icon"></button>
 				</div>
-				<button id="like-icon"></button>
+				<div class="like">
+					<input type="checkbox" class="like-btn">
+					<i class="fa fa-3x fa-heart"></i>
+				</div>
+
 			</div>
 		</div>
 
