@@ -15,6 +15,7 @@ public class Inscription extends HttpServlet {
     public static final String ATT_USER = "utilisateur";
     public static final String ATT_FORM = "formulaire";
     public static final String VUE = "/WEB-INF/FormulaireInscription.jsp";
+    public static final String HOME = "/index.jsp";
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
         /* Affichage de la page d'inscription */
@@ -32,7 +33,13 @@ public class Inscription extends HttpServlet {
         request.setAttribute( ATT_FORM, formulaire );
         request.setAttribute( ATT_USER, utilisateur );
 
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        if((boolean) request.getAttribute("isOk")){
+            request.removeAttribute("isOk");
+            this.getServletContext().getRequestDispatcher( HOME ).forward( request, response );
+        } else {
+            request.removeAttribute("isOk");
+            this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+        }
     }
 
 }

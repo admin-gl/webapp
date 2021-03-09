@@ -20,7 +20,7 @@
                 <h1>Connectez-vous</h1>
                 <input type="text" name="email" placeholder="e-mail"><br>
                 <input type="password" name="password" placeholder="mot de passe"><br>
-                <button type="submit">Connection</button>
+                <button type="submit">Connexion</button>
                 <p>pas encore membre ? <span onclick="window.location.href='inscription'">crééez-vous un compte</span></p>
             </form>
         </div>

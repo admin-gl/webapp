@@ -1,4 +1,5 @@
 package com.voidapp.ApplicationWeb.formulaire;
+import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 import com.voidapp.ApplicationWeb.bdd.Hasher;
 import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 
@@ -39,6 +40,7 @@ public final class InscriptionFormulaire {
         String prenom = getValeurChamp( request, CHAMP_PRENOM );
         String adresse = getValeurChamp( request, CHAMP_ADRESSE );
         String civilite = request.getParameter(CHAMP_CIVILITE);
+
         Utilisateur utilisateur = new Utilisateur();
 
         utilisateur.setDateadhesion(new java.sql.Date(new Date().getTime()));
@@ -89,7 +91,14 @@ public final class InscriptionFormulaire {
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'inscription.";
             resultat = resultat + utilisateur.AddUser();
+            if(resultat.matches(".*erreur dans la requete")){
+                request.setAttribute("isOk", false);
+                resultat = "Cette adresse e-mail est déja utilisée";
+            } else {
+                request.setAttribute("isOk", true);
+            }
         } else {
+            request.setAttribute("isOk", false);
             resultat = "Échec de l'inscription.";
         }
 
