@@ -18,12 +18,8 @@
             <%
                 if(request.getSession().getAttribute("email")!=null){
             %>
-<<<<<<< HEAD
             <a class="sign" href="logout">Déconnection</a>
             <a class="sign" href="profile">Profil</a>
-=======
-            <a class="sign" href="logout">Déconnexion</a>
->>>>>>> main
             <%
                 } else {
             %>
@@ -43,9 +39,9 @@
         <script src="particles.js-master/particles.js"></script>
         <script src="particles.js-master/app.js"></script>
 
-        <div class="bottom-nav">
-            <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
-        </div>
+        <footer class="bottom-nav">
+            <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+        </footer>
 
     </body>
 

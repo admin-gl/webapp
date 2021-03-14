@@ -1,6 +1,13 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="com.voidapp.ApplicationWeb.Musique.Musique"%>
+<%
+    Musique pochettes[] = (Musique[]) request.getAttribute("pochettes");
+    String title = pochettes[1].getTitle();
+    String artiste = pochettes[1].getAuthor();
+    String imgPath = pochettes[1].getImgPath();
+%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<link href="css/home.css" rel="stylesheet" type="text/css">
+<link href="css/musique.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
 <html>
@@ -20,6 +27,8 @@
         if(request.getSession().getAttribute("email")!=null){
     %>
     <a class="sign" href="logout">Déconnection</a>
+    <a class="sign" href="profile">Profil</a>
+    <a class="sign" href="recherche">Recherche</a>
     <%
     } else {
     %>
@@ -38,11 +47,20 @@
 <script src="particles.js-master/app.js"></script>
 
 <br/>
-<a href="accueil-servlet">Accueil Servlet</a>
+<a style="font-size:30px">Suggestions pour <%=request.getSession().getAttribute("prenom")%> : </a>
+<div class="player">
+    <img src="<%=imgPath%>" alt=" ">
 
-<div style="padding-bottom:300px"></div>
-<div class="bottom-nav">
-    <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+    <h3 style="color:white;"><%= title %></h3>
+    <h5 style="color:white"><%= artiste%></h5>
+
 </div>
+<div>
+
+</div>
+
+<footer class="bottom-nav">
+    <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+</footer>
 </body>
 </html>

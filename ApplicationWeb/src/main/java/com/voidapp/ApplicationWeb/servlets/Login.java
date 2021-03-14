@@ -31,8 +31,8 @@ public class Login extends HttpServlet {
         if(AccesBdd.checkUser(email, Hasher.encode(password))) {
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
-            session.setAttribute("nom", fname);
-            session.setAttribute("prenom", lname);
+            session.setAttribute("prenom", fname);
+            session.setAttribute("nom", lname);
             request.getRequestDispatcher(HOME).forward(request, response);
         } else {
             request.getRequestDispatcher(THIS).forward(request, response);
