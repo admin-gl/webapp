@@ -183,7 +183,7 @@ public class AccesBdd {
             Connection c = Connect();
             PreparedStatement ps = c.prepareStatement("update Utilisateur set mdp=? where email=?;");
             ps.setString(1, Hasher.encode(newmdp));
-            ps.setString(2, "glenan.bolou@gmail.com");
+            ps.setString(2, email);
             ps.executeUpdate();
         }
         catch(Exception e) {
@@ -320,12 +320,12 @@ public class AccesBdd {
         String motDePasse = properties.getString("DB_PASSWORD");
         int k=0;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(properties.getString("DB_DRIVER"));
             Connection conn = DriverManager.getConnection(url, utilisateur, motDePasse);
             System.out.println("db connected");
             PreparedStatement ps = conn.prepareStatement("select * from musique;");
             ResultSet rs =ps.executeQuery();
-            //Musique m[] = new Musique[img.length];
+            Musique m[] = new Musique[img.length];
             while (rs.next()){
                 FileOutputStream outputImg = new FileOutputStream(img[k]);
                 k++;
@@ -339,13 +339,13 @@ public class AccesBdd {
                     while (binaryStream.read(buffer) > 0) {
                         outputImg.write(buffer);
                     }
-                    //m[k] = new Musique("" + id,nom,artiste,"music/imgP"+k+".png");
+                    m[k] = new Musique("" + id,nom,artiste,"music/imgP"+k+".png");
                 } else {
-                    //m[k] = new Musique("" + id,nom,artiste);
+                    m[k] = new Musique("" + id,nom,artiste);
                 }
             }
             rs.close();
-            //return m;
+            return m;
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -362,6 +362,7 @@ public class AccesBdd {
         File f1 = new File("/Users/glenan/Desktop/webapp/ApplicationWeb/src/main/webapp/music/imgP1.png");
         File f2 = new File("/Users/glenan/Desktop/webapp/ApplicationWeb/src/main/webapp/music/imgP2.png");
         File F[] = {f1,f2};
+
         getPochette(F);
         System.out.println(getTotalMusic());
     }
