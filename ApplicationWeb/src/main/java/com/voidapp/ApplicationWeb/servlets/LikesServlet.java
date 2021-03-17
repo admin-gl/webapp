@@ -1,33 +1,32 @@
 package com.voidapp.ApplicationWeb.servlets;
 
 import com.voidapp.ApplicationWeb.bdd.AccesBdd;
-import com.voidapp.ApplicationWeb.bdd.Hasher;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class LikesServlet extends HttpServlet {
-    private final String pageName="/WEB-INF/listeningPage.jsp";
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String like = request.getParameter("like");
-        System.out.println(like);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
+        HttpSession session = request.getSession();
+        boolean liked = request.getParameter("data").matches("true");
+        String idMusique = (String) session.getAttribute("idMusique");
+        String email = (String) session.getAttribute("email");
 
-
-        try {
-            rd.forward(request, response);
-        } catch (ServletException | IOException e) {
-            e.printStackTrace();
+        AccesBdd.updateLikes(email, idMusique, liked);
+        ArrayList<Integer> likes = (ArrayList<Integer>) session.getAttribute("likes");
+        System.out.println(likes);
+        if(liked){
+            likes.add(Integer.parseInt(idMusique));
+        } else {
+            likes.remove((Object) Integer.parseInt(idMusique));
         }
+        session.setAttribute("likes", likes);
+        System.out.println(likes);
     }
 }

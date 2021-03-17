@@ -29,7 +29,7 @@
     <%
         if(request.getSession().getAttribute("email")!=null){
     %>
-    <a class="sign" href="logout">Déconnection</a>
+    <a class="sign" href="logout">Déconnexion</a>
     <a class="sign" href="profile">Profil</a>
     <%
     } else {
@@ -54,7 +54,7 @@
                     String t = titles[k].getTitle();
                     int id = Integer.parseInt(titles[k].getId());
             %>
-            <li><a href="musique?id=<%=id%>"><%=k+1%> - <%=t%></a></li>
+            <li onclick="window.location.href='musique?id=<%=id%>'"><a><%=k+1%> - <%=t%></a></li>
             <br>
             <%
                 }

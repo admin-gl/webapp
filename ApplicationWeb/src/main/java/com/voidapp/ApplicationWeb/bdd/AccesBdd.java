@@ -6,6 +6,7 @@ import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
 import java.io.*;
 import java.sql.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -136,7 +137,7 @@ public class AccesBdd {
         int k=0;
         try {
             Connection c =  Connect();
-            PreparedStatement ps = c.prepareStatement("select top 10 * from musique order by likes;");
+            PreparedStatement ps = c.prepareStatement("select top 10 * from musique;");
             ResultSet rs =ps.executeQuery();
             while (rs.next()){
                 top[k] = rs.getInt(1);
@@ -341,11 +342,53 @@ public class AccesBdd {
         return i;
     }
 
+    public static void updateLikes(String email, String idMusique , boolean liked){
+        try {
+            Connection c = Connect();
+            PreparedStatement ps;
+            if(liked) {
+                ps = c.prepareStatement("insert into likes (id_musique, id_utilisateur) values (?, (select id from Utilisateur where email= ?))");
+            } else {
+                ps = c.prepareStatement("delete from likes where id_musique=? and id_utilisateur=(select id from Utilisateur where email= ?)");
+            }
+            ps.setString(1, idMusique);
+            ps.setString(2, email);
+            ps.executeUpdate();
+
+            ps.close();
+            c.close();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Integer> getLikes(String email){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("select id_musique from likes where id_utilisateur = (select id from Utilisateur where email = ?)");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Integer> temp = new ArrayList<>();
+            while(rs.next()){
+                temp.add(rs.getInt("id_musique"));
+            }
+            rs.close();
+            ps.close();
+            c.close();
+
+            return temp;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
+    }
+
     /*
     les quelques fonctions suvantes servaient à téléchager la musique stockée sous forme de blob sur la bdd ainsi qu'à l'uploader
     c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu, et on a décidé de travailler plus simplement après
-     */
-    /*
+
+
     public static void writeMusic(String nom, String artiste, String form, String absoluteMusPath, String absoluteImgPath){
         properties = ResourceBundle.getBundle(resourceBundle);
         String SQL = "INSERT INTO musique (nom, artiste, form) VALUES (?, ?, ?);";
@@ -517,9 +560,7 @@ public class AccesBdd {
         return null;
     }
 
-     */
-
-/*    public static void main(String[] args) {
+     public static void main(String[] args) {
         writeMusic("enigme 1", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_1.wav", null);
         writeMusic("enigme 2", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_2.wav", "C:\\Users\\kilia\\Pictures\\musique.png");
     }

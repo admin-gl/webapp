@@ -10,6 +10,10 @@
 	String artiste = music.getAuthor();
 	String imgPath = music.getImgPath();
 	PochetteAlbum[] suggested = (PochetteAlbum[]) request.getAttribute("suggested");
+
+	String liked = (String) request.getAttribute("liked");
+	System.out.println(liked);
+
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -22,6 +26,7 @@
 <script src="../js-player/lottie.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
 <script src="../js-player/player.js"></script>
+<script src="../js-player/likes.js"></script>
 <html>
 	<head>
 		<title>Vous écoutez <%= title %></title>
@@ -37,7 +42,7 @@
 		<%
 			if(request.getSession().getAttribute("email")!=null){
 		%>
-		<a class="sign" href="logout">Déconnection</a>
+		<a class="sign" href="logout">Déconnexion</a>
 		<a class="sign" href="profile">Profil</a>
 		<%
 		} else {
@@ -72,10 +77,14 @@
 				<%
 					if(request.getSession().getAttribute("email")!=null){
 				%>
-				<div class="like" >
-					<input type="checkbox" name="like" class="like-btn" onchange="document.getElementById('likes').submit()">
+				<form class="like" method="post" action="musique">
+					<% if(liked.equals("1")){%>
+						<input type="checkbox" name="like" class="like-btn" checked>
+					<% } else { %>
+						<input type="checkbox" name="like" class="like-btn">
+					<% } %>
 					<i class="fa fa-3x fa-heart"></i>
-				</div>
+				</form>
 				<%
 				} else {
 				%>

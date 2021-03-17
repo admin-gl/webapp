@@ -5,11 +5,13 @@ import com.voidapp.ApplicationWeb.Musique.PochetteAlbum;
 import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class MainServletMusique extends HttpServlet {
 
@@ -73,8 +75,19 @@ public class MainServletMusique extends HttpServlet {
 		String titleA = SuggestedAlbums[0].getTitle();
         System.out.println("/music/"+titleA+"/cover.jpg");
         System.out.println(music.getMusPath());
-
-
+		HttpSession session = request.getSession();
+        if(session.getAttribute("email") != null){
+        	session.setAttribute("idMusique", music.getId());
+			ArrayList<Integer> temp = (ArrayList<Integer>) session.getAttribute("likes");
+			System.out.println(temp.contains(Integer.parseInt(id)));
+			if(temp.contains(Integer.parseInt(id))){
+				request.setAttribute("liked", "1");
+			} else {
+				request.setAttribute("liked", "0");
+			}
+		} else {
+			request.setAttribute("liked", "0");
+		}
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
 

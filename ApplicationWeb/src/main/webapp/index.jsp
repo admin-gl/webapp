@@ -18,7 +18,7 @@
             <%
                 if(request.getSession().getAttribute("email")!=null){
             %>
-            <a class="sign" href="logout">Déconnection</a>
+            <a class="sign" href="logout">Déconnexion</a>
             <a class="sign" href="profile">Profil</a>
             <%
                 } else {
