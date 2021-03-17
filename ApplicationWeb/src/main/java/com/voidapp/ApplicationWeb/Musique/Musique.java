@@ -49,6 +49,11 @@ public class Musique {
 		this.author = paramAuthor;
 		this.imgPath = "logos/planet_void_white_alpha.png";
 	}
+
+	public Musique(String paramId, String paramTitle) {
+		this.id = paramId;
+		this.title = paramTitle;
+	}
 	
 	/* Accesseurs */
 	public String getId() {

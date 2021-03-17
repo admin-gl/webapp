@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="unnamed">
+    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="mysql-connector-java-8.0.21" />
+          <element id="library" level="project" name="servlet-api" />
+        </element>
+        <element id="directory" name="classes">
+          <element id="jpa-descriptors" facet="webapp/jpa/JPA" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="webapp/web/Web" />
+      <element id="javaee-facet-resources" facet="webapp/web/Web2" />
+    </root>
+  </artifact>
+</component>

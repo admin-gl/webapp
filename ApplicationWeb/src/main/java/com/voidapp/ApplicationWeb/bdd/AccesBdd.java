@@ -132,11 +132,14 @@ public class AccesBdd {
         return lname;
     }
 
-    public static int getTotalMusic(){
+    /*
+     * permet d'obtenir le total de titres présents dans la bibliothèque
+     */
+    public static int getTotalAlbum(){
         int i = -1;
         try {
             Connection c =  Connect();
-            PreparedStatement ps = c.prepareStatement("select count(*) from musique;");
+            PreparedStatement ps = c.prepareStatement("select count(*) from album;");
             ResultSet rs =ps.executeQuery();
             while (rs.next()){
                 i = rs.getInt(1);
@@ -147,7 +150,9 @@ public class AccesBdd {
         }
         return i;
     }
-
+    /*
+     * permet d'obtenir les dux titres les plus aimés (à voir)
+     */
     public static int[] getTopTen(){
         int top[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
         int k=0;
@@ -164,6 +169,45 @@ public class AccesBdd {
             e.printStackTrace();
         }
         return top;
+    }
+
+    public static int getNbSongsAlbum(String id){
+        String n = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select count(*) from musique, album, linkerAlbMus where album.id=? and linkerAlbMus.idAlb=album.id and linkerAlbMus.idMus=musique.id;");
+            ps.setString(1, id);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                n = rs.getString(1);
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return Integer.parseInt(n);
+    }
+
+    public static Musique[] getSongsInAlbum(String idAlb,int nbSong){
+        Musique[] titles = new Musique[nbSong];
+        int k=0;
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select distinct musique.id,musique.nom from musique, album, linkerAlbMus where linkerAlbMus.idAlb=? and musique.id=linkerAlbMus.idMus;");
+            ps.setString(1, idAlb);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                titles[k] = new Musique(rs.getString("id"),rs.getString("nom"));
+                k++;
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("dans getSongs : "+Arrays.toString(titles));
+        return titles;
     }
 
     public static void chMail(String oldemail, String newemail){
@@ -191,6 +235,139 @@ public class AccesBdd {
         }
     }
 
+    public static String getTitle(String id){
+        String title = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select nom from musique where id=?;");
+            ps.setString(1, id);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                title = rs.getString("nom");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return title;
+    }
+
+    public static String getArtist(String id){
+        String artist = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select artiste from musique where id=?;");
+            ps.setString(1, id);
+            ResultSet rs =ps.executeQuery();
+            while (rs.next()){
+                artist = rs.getString("artiste");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return artist;
+    }
+
+    public static String getAlbumFromSongId(String id){
+        String album = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select album.titre from album,musique,linkerAlbMus where linkerAlbMus.idMus =? and album.id=linkerAlbMus.idAlb limit 1;");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                album = rs.getString("titre");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return album;
+    }
+
+    public static int getAlbumIdFromAlbumTitle(String title){
+        int idA=-1;
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select id from album where titre=?;");
+            ps.setString(1, title);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                idA = rs.getInt("id");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return idA;
+    }
+
+    public static String getAlbumTitle(String id){
+        String titleA = "";
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select titre from album where id=?;");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                titleA = rs.getString("titre");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return titleA;
+    }
+
+    public static String[] getSimilarAlbum(String id, int nbSim){
+        String[] suggested = new String[nbSim];
+        int i=0;
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select distinct album.id from album,musique,linkerAlbMus where style = (select style from album, musique, linkerAlbMus where linkerAlbMus.idMus =? and album.id=linkerAlbMus.idAlb limit 1);");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                suggested[i] = rs.getString("id");
+                i++;
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return suggested;
+    }
+
+    public static int getNbSimilarAlb(String id){
+        int i=-1;
+        try {
+            Connection c =  Connect();
+            PreparedStatement ps = c.prepareStatement("select count(distinct album.id) as nbSim from album,musique,linkerAlbMus where style = (select style from album, musique, linkerAlbMus where linkerAlbMus.idMus =? and album.id=linkerAlbMus.idAlb limit 1);");
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                i = rs.getInt("nbSim");
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+    /*
+    les quelques fonctions suvantes servaient à téléchager la musique stockée sous forme de blob sur la bdd ainsi qu'à l'uploader
+    c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu, et on a décidé de travailler plus simplement après
+     */
+    /*
     public static void writeMusic(String nom, String artiste, String form, String absoluteMusPath, String absoluteImgPath){
         properties = ResourceBundle.getBundle(resourceBundle);
         String SQL = "INSERT INTO musique (nom, artiste, form) VALUES (?, ?, ?);";
@@ -353,10 +530,12 @@ public class AccesBdd {
         return null;
     }
 
+     */
+
 /*    public static void main(String[] args) {
         writeMusic("enigme 1", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_1.wav", null);
         writeMusic("enigme 2", "Kilian", "wav", "C:\\Users\\kilia\\Documents\\webapp\\ApplicationWeb\\src\\main\\webapp\\music\\enigme_2.wav", "C:\\Users\\kilia\\Pictures\\musique.png");
-    }*/
+    }
 
     public static void main(String[] args) {
         File f1 = new File("/Users/glenan/Desktop/webapp/ApplicationWeb/src/main/webapp/music/imgP1.png");
@@ -366,6 +545,8 @@ public class AccesBdd {
         getPochette(F);
         System.out.println(getTotalMusic());
     }
+
+ */
 
 }
 

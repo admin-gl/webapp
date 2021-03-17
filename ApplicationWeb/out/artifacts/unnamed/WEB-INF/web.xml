@@ -23,6 +23,27 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/inscription</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+  	  <display-name>MainServletMusique</display-name>
+      <servlet-name>MainServletMusique</servlet-name>
+      <servlet-class>com.voidapp.ApplicationWeb.servlets.MainServletMusique</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainServletMusique</servlet-name>
+        <url-pattern>/musique</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AjoutMusiqueServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.AjoutMusiqueServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AjoutMusiqueServlet</servlet-name>
+        <url-pattern>/ajout</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>News</servlet-name>
@@ -52,6 +73,16 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.Profile</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -18,6 +18,7 @@ public class AjoutMusiqueServlet extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+        /*
         String titre = getParam( request, "titre");
         String artiste = getParam(request, "artiste");
         String musPath = getParam(request, "audio");
@@ -45,5 +46,7 @@ public class AjoutMusiqueServlet extends HttpServlet {
         } else {
             return valeur.trim();
         }
+*/
     }
+
 }

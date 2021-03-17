@@ -1,10 +1,12 @@
 package com.voidapp.ApplicationWeb.servlets;
 
 import com.voidapp.ApplicationWeb.Musique.Musique;
+import com.voidapp.ApplicationWeb.Musique.PochetteAlbum;
 import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +20,34 @@ public class MainServletMusique extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
 
 
-		Musique music = new Musique();  // la musique qui sera effectivement transmise au client
+		Musique music = new Musique();
 		String id = request.getParameter("id");
-		
+
+		String album = AccesBdd.getAlbumFromSongId(id);
+		String artist = AccesBdd.getArtist(id);
+		String titre = AccesBdd.getTitle(id);
+
+
+		int nbSim = AccesBdd.getNbSimilarAlb(id);
+		int idAlbum = AccesBdd.getAlbumIdFromAlbumTitle(album);
+		PochetteAlbum[] SuggestedAlbums = new PochetteAlbum[nbSim];
+		//les id des albums de même style
+		System.out.println("idAlb = "+idAlbum);
+		String[] suggested = AccesBdd.getSimilarAlbum(id,nbSim);
+
+		for (int k=0;k<nbSim;k++){
+			if(suggested[k]!=null){
+				SuggestedAlbums[k] = new PochetteAlbum(suggested[k], AccesBdd.getAlbumTitle(suggested[k]));
+			} else{
+				SuggestedAlbums[k] = null;
+			}
+		}
+
+		/* cette partie de code était dédiée à la récupération des blobs de musique/image sotckées en ligne
+		* c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu
+		* on a alors décidé de faire les choses plus simplement, avec des données en local */
+
+		/*
 		if (id != null && !id.contentEquals("")) {
 			File musFile = new File(getServletContext().getRealPath("/") + "/music/music.wav");
 			File imgFile = new File(getServletContext().getRealPath("/") + "music/img.png");
@@ -37,23 +64,27 @@ public class MainServletMusique extends HttpServlet {
 			}
 			music = AccesBdd.readMusic(Integer.parseInt(id), new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
 		}
+
+		 */
+
+		music = new Musique(id, titre, "mp3", artist, "/music/"+album+"/"+titre+".mp3", "/music/"+album+"/cover.jpg");
+
         request.setAttribute("music", music);
+        request.setAttribute("suggested", SuggestedAlbums);
+		request.setAttribute("idAlbum", idAlbum);
+		String titleA = SuggestedAlbums[0].getTitle();
+        System.out.println("/music/"+titleA+"/cover.jpg");
 
 
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
-        
+
 
         try {
-
               rd.forward(request, response);
-
         } catch (ServletException | IOException e) {
-
               e.printStackTrace();
-
         }
-
 	}
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
