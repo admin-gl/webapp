@@ -4,7 +4,6 @@ function init(){
     const seekSlider = document.getElementById('seek-slider');
     const volumeSlider = document.getElementById('volume-slider');
     const muteIconContainer = document.getElementById('mute-icon');
-    const likeIconContainer = document.getElementById('like-icon');
     let playState = 'play';
     let muteState = 'unmute';
 

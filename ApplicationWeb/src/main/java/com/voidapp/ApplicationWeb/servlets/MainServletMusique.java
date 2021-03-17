@@ -4,9 +4,7 @@ import com.voidapp.ApplicationWeb.Musique.Musique;
 import com.voidapp.ApplicationWeb.Musique.PochetteAlbum;
 import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,9 +16,6 @@ public class MainServletMusique extends HttpServlet {
 	private final String pageName="/WEB-INF/listeningPage.jsp";
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
-
-
-		Musique music = new Musique();  // la musique qui sera effectivement transmise au client
 
 		String id = request.getParameter("id");
 
@@ -46,9 +41,8 @@ public class MainServletMusique extends HttpServlet {
 
 		/* cette partie de code était dédiée à la récupération des blobs de musique/image sotckées en ligne
 		* c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu
-		* on a alors décidé de faire les choses plus simplement, avec des données en local */
+		* on a alors décidé de faire les choses plus simplement, avec des données en local
 
-		/*
 		if (id != null && !id.contentEquals("")) {
 			File musFile = new File(getServletContext().getRealPath("/") + "/music/music.wav");
 			File imgFile = new File(getServletContext().getRealPath("/") + "music/img.png");
@@ -71,13 +65,14 @@ public class MainServletMusique extends HttpServlet {
 
 		 */
 
-		music = new Musique(id, titre, "mp3", artist, "/music/"+album+"/"+titre+".mp3", "/music/"+album+"/cover.jpg");
+		Musique music = new Musique(id, titre, "mp3", artist, "/music/"+album+"/"+titre+".mp3", "/music/"+album+"/cover.jpg");
 
         request.setAttribute("music", music);
         request.setAttribute("suggested", SuggestedAlbums);
 		request.setAttribute("idAlbum", idAlbum);
 		String titleA = SuggestedAlbums[0].getTitle();
         System.out.println("/music/"+titleA+"/cover.jpg");
+        System.out.println(music.getMusPath());
 
 
 

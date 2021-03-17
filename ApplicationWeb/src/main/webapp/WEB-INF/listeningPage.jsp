@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="../js-player/lottie.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
 <script src="../js-player/player.js"></script>
 <html>
 	<head>
@@ -59,7 +60,7 @@
 			<h5 style="color:white"><%= artiste%></h5>
 			<div id="audio-like-player-container">
 				<div id="audio-player-container">
-					<audio id="audio" src=<%=musPath%> type="audio/<%=format%>" preload="auto"></audio>
+					<audio id="audio" src="<%=musPath%>" type="audio/<%=format%>" preload="auto"></audio>
 					<button id="play-icon"></button>
 					<span id="current-time" class="time">0:00</span>
 					<input type="range" id="seek-slider" max="100" value="0">
@@ -79,7 +80,7 @@
 				} else {
 				%>
 				<div class="like" style="display: none" >
-					<input type="checkbox" name="like" class="like-btn" onchange="document.getElementById('likes').submit()">
+					<input type="checkbox" name="like" class="like-btn">
 					<i class="fa fa-3x fa-heart"></i>
 				</div>
 				<%
