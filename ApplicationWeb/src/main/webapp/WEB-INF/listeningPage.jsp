@@ -59,7 +59,7 @@
 			<h5 style="color:white"><%= artiste%></h5>
 			<div id="audio-like-player-container">
 				<div id="audio-player-container">
-					<audio id="audio" src=<%=musPath%> type="audio/<%=format%>" preload="auto"></audio>
+					<audio id="audio" src="<%=musPath%>" type="audio/<%=format%>" preload="auto"></audio>
 					<button id="play-icon"></button>
 					<span id="current-time" class="time">0:00</span>
 					<input type="range" id="seek-slider" max="100" value="0">

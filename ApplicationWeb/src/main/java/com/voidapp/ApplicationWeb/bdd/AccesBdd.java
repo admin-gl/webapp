@@ -363,6 +363,65 @@ public class AccesBdd {
         return i;
     }
 
+    public static void addSong(String titre, String artiste, String album, String style){
+        int idA = -1;
+        int idS = -1;
+        try {
+            Connection c =  Connect();
+            PreparedStatement albExist = c.prepareStatement("select id from album where titre=?");
+            PreparedStatement addS = c.prepareStatement("insert into musique(nom,artiste) values(?,?);");
+            PreparedStatement getSId = c.prepareStatement("select id from musique where nom=? and artiste=?;");
+            albExist.setString(1, album);
+            addS.setString(1, titre);
+            addS.setString(2, artiste);
+            getSId.setString(1,titre);
+            getSId.setString(2,artiste);
+            ResultSet rs = albExist.executeQuery();
+            addS.executeUpdate();
+            ResultSet rs3 = getSId.executeQuery();
+            while (rs.next()){
+                idA = rs.getInt("id");
+            }
+            while (rs3.next()){
+                idS = rs3.getInt("id");
+            }
+
+            System.out.println(idA+idS);
+            //si l'album existe déjà
+            if (idA!=-1){
+                if (idS!=-1){
+                    PreparedStatement addLink = c.prepareStatement("insert into linkerAlbMus values(?,?);");
+                    addLink.setString(1, ""+idA);
+                    addLink.setString(2, ""+idS);
+                    addLink.executeUpdate();
+                }
+            //si l'album n'existe pas
+            } else {
+                PreparedStatement addA = c.prepareStatement("insert into album(titre,artiste,style) values(?,?,?);");
+                PreparedStatement getAId = c.prepareStatement("select id from album where titre=? and artiste=?;");
+                addA.setString(1,album);
+                addA.setString(2,artiste);
+                addA.setString(3,style);
+                getAId.setString(1,album);
+                getAId.setString(2,artiste);
+                addA.executeUpdate();
+                ResultSet rs5 = getAId.executeQuery();
+                while (rs5.next()){
+                    idA = rs5.getInt("id");
+                }
+                if (idS!=-1){
+                    PreparedStatement addLink = c.prepareStatement("insert into linkerAlbMus values(?,?);");
+                    addLink.setString(1, ""+idA);
+                    addLink.setString(2, ""+idS);
+                    addLink.executeUpdate();
+                }
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /*
     les quelques fonctions suvantes servaient à téléchager la musique stockée sous forme de blob sur la bdd ainsi qu'à l'uploader
     c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu, et on a décidé de travailler plus simplement après

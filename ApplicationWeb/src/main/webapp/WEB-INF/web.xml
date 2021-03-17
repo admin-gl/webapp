@@ -42,7 +42,7 @@
 
     <servlet-mapping>
         <servlet-name>AjoutMusiqueServlet</servlet-name>
-        <url-pattern>/ajout</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -104,5 +104,6 @@
         <servlet-name>LikesServlet</servlet-name>
         <url-pattern>/like</url-pattern>
     </servlet-mapping>
+
 
 </web-app>

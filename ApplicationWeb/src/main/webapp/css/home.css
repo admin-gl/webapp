@@ -107,3 +107,13 @@ footer.bottom-nav{
     float:left;
     margin:-10px 0;
 }
+
+.bottom-nav a.sign {
+    float: right;
+    font-family: "Rubik";
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 18px;
+    text-decoration: none;
+    font-size: 20px;
+}

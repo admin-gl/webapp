@@ -7,6 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 public class AjoutMusiqueServlet extends HttpServlet {
@@ -18,23 +24,12 @@ public class AjoutMusiqueServlet extends HttpServlet {
     }
 
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-        /*
-        String titre = getParam( request, "titre");
-        String artiste = getParam(request, "artiste");
-        String musPath = getParam(request, "audio");
-        String imgPath = getParam(request, "image");
-        String format;
-        if(musPath != null){
-            format = musPath.substring(musPath.length()-4);
-            if(titre != null && artiste != null) {
-               AccesBdd.writeMusic(titre, artiste, format, musPath, imgPath);
-            } else {
-                response.sendError(1, "pas de titre ou d'artiste");
-            }
-        } else {
-            response.sendError(1, "pas de chemin vers la musique");
-        }
+        String titre = getParam( request, "Titre");
+        String artiste = getParam(request, "Artiste");
+        String album = getParam(request, "Album");
+        String Style = getParam(request, "Style");
 
+        AccesBdd.addSong(titre,artiste,album,Style);
 
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
@@ -46,7 +41,6 @@ public class AjoutMusiqueServlet extends HttpServlet {
         } else {
             return valeur.trim();
         }
-*/
     }
 
 }
