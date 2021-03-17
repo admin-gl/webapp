@@ -75,4 +75,34 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Profile</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.Profile</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AlbumServlet</servlet-name>
+        <url-pattern>/album</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AlbumServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.AlbumServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LikesServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.LikesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LikesServlet</servlet-name>
+        <url-pattern>/like</url-pattern>
+    </servlet-mapping>
+
 </web-app>

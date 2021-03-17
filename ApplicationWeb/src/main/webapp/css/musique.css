@@ -69,6 +69,18 @@ div.topnav
     left: 0
 }
 
+#scrollSuggested{
+    width: 60%;
+    height: 190px;
+    margin: 100px auto;
+    background: none;
+    overflow: auto;
+    white-space: nowrap;
+}
+#scrollSuggested a img{
+    margin: 0 0 0 0;
+}
+
 .player {
     display : flex;
     flex-direction: column;

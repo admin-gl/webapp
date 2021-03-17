@@ -23,13 +23,16 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html");
-
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String fname = AccesBdd.getFName(email);
+        String lname = AccesBdd.getLName(email);
 
         if(AccesBdd.checkUser(email, Hasher.encode(password))) {
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
+            session.setAttribute("prenom", fname);
+            session.setAttribute("nom", lname);
             request.getRequestDispatcher(HOME).forward(request, response);
         } else {
             request.getRequestDispatcher(THIS).forward(request, response);

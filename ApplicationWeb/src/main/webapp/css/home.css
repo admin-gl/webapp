@@ -9,7 +9,6 @@ h1 {
     position: center;
     font-family: "Rubik";
     letter-spacing: 2px;
-    font-size: 156px;
     line-height: 200px;
     font-weight: bold;
     color:white;
@@ -74,6 +73,7 @@ div.topnav
     font-size: 20px;
 }
 
+
 #particles-js canvas {
     display: block;
     vertical-align: bottom;
@@ -94,7 +94,7 @@ div.topnav
     left: 0
 }
 
-div.bottom-nav{
+footer.bottom-nav{
     position: fixed;
     bottom: 6px;
     width: 99%;

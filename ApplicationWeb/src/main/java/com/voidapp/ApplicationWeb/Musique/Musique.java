@@ -33,6 +33,27 @@ public class Musique {
 		this.musPath = paramPath;
 		this.imgPath = paramPathImg;
 	}
+
+	/* Constructeur avec paramètres et image (que pochette avec illust)*/
+	public Musique(String paramId, String paramTitle, String paramAuthor, String paramPathImg) {
+		this.id = paramId;
+		this.title = paramTitle;
+		this.author = paramAuthor;
+		this.imgPath = paramPathImg;
+	}
+
+	/* Constructeur avec paramètres et image (que pochette sans illust)*/
+	public Musique(String paramId, String paramTitle, String paramAuthor) {
+		this.id = paramId;
+		this.title = paramTitle;
+		this.author = paramAuthor;
+		this.imgPath = "logos/planet_void_white_alpha.png";
+	}
+
+	public Musique(String paramId, String paramTitle) {
+		this.id = paramId;
+		this.title = paramTitle;
+	}
 	
 	/* Accesseurs */
 	public String getId() {
