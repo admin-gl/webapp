@@ -51,7 +51,7 @@ public class AccesBdd {
             /* Exécution d'une requête d'écriture*/
 
 
-            String requete ="INSERT INTO Utilisateur (email,prenom,nom,adresse,mdp) VALUES ('"+user.getMail()+"','"+user.getPrenom()+"','"+user.getNom()+"','"+user.getAdressefacturation()+"','"+user.getMdp()+"');";
+            String requete="INSERT INTO Utilisateur (email,nom,prenom,mdp,adresse,dateadhesion,estadmin,civilite) VALUES ('"+user.getMail()+"','"+user.getNom()+"','"+user.getPrenom()+"','"+user.getMdp()+"','"+user.getAdressefacturation()+"','"+user.getDateadhesion()+"',false,'"+user.getCivilite()+"');";
             int statut = statement.executeUpdate(requete);
 
         } catch ( SQLException e ) {
