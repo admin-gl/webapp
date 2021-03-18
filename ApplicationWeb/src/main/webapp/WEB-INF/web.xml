@@ -96,8 +96,6 @@
         <url-pattern>/like</url-pattern>
     </servlet-mapping>
 
-<<<<<<< HEAD
-=======
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>com.voidapp.ApplicationWeb.servlets.SearchServlet</servlet-class>
@@ -107,6 +105,25 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
     </servlet-mapping>
->>>>>>> main
+
+    <servlet>
+        <servlet-name>DeleteSongServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.DeleteSongServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteSongServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateSongServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.UpdateSongServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateSongServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
+    </servlet-mapping>
 
 </web-app>

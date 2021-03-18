@@ -238,6 +238,25 @@ public class AccesBdd {
         }
     }
 
+    public static String isAdmin(String email){
+        String adm ="";
+        try {
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("select estadmin from Utilisateur where email=?;");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                adm = rs.getString("estadmin");
+            }
+            ps.close();
+            c.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return adm;
+    }
+
     public static String getTitle(String id){
         String title = "";
         try {
@@ -531,6 +550,35 @@ public class AccesBdd {
             e.printStackTrace();
         }
         return new SearchResult(new Musique[0], new Album[0]);
+    }
+
+    public static void deleteSongId(String id){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("delete from musique where id=?;");
+            ps.setString(1, id);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateSong(String id, String newTitle){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("update musique set nom=? where id=?;");
+            System.out.println(newTitle);
+            System.out.println(id);
+            ps.setString(1, newTitle);
+            ps.setString(2, id);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /*

@@ -39,7 +39,7 @@
     <a class="sign" href="inscription">Inscription</a>
     <a class="sign" href="login">Connexion</a>
     <%
-        }
+    }
     %>
 
 </div>
@@ -81,9 +81,24 @@
                 <h4><%=t%></h4>
                 <h6><%=art%></h6>
             </div>
+            <%
+                if ( request.getSession().getAttribute("email")!=null &&
+                        request.getSession().getAttribute("admin").equals("1")){
+            %>
+            <div class="dropdown">
+                <button class="dropbtn" style="font-size: x-large">...</button>
+                <div class="dropdown-content">
+                    <a href="edit?id=<%=id%>&oldTitle=<%=t%>">éditer</a>
+                    <a href="delete?id=<%=id%>">supprimer</a>
+                </div>
+            </div>
+            <%
+                }
+            %>
         </li>
+
         <%
-            }
+        }
         %>
     </ul>
 </div>

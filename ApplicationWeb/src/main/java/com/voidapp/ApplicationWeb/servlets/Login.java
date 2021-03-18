@@ -32,11 +32,14 @@ public class Login extends HttpServlet {
             String fname = AccesBdd.getFName(email);
             String lname = AccesBdd.getLName(email);
             ArrayList<Integer> likes = AccesBdd.getLikes(email);
+            String admin = AccesBdd.isAdmin(email);
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             session.setAttribute("prenom", fname);
             session.setAttribute("nom", lname);
             session.setAttribute("likes", likes);
+            session.setAttribute("admin", admin);
+            System.out.println("dans login servlet:"+admin);
             request.getRequestDispatcher(HOME).forward(request, response);
         } else {
             request.getRequestDispatcher(THIS).forward(request, response);

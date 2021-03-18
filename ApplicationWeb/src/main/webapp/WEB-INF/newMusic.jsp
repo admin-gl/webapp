@@ -49,7 +49,8 @@
     </div>
     <br>
     <%
-        if (request.getSession().getAttribute("email")!=null){
+        if ( request.getSession().getAttribute("email")!=null &&
+                request.getSession().getAttribute("admin").equals("1")){
     %>
     <footer class="bottom-nav">
         <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
