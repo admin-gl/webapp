@@ -17,31 +17,32 @@
 </head>
 <body>
 
-<div class="topnav">
-    <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
-    <a href="../index.jsp">Accueil</a>
-    <a href="tendances">Tendances</a>
-    <%
-        if(request.getSession().getAttribute("email")!=null){
-    %>
-    <form class="search-container" method="get" action="search">
-        <input name="s" class="searchBar" type="text" placeholder="Rechercher">
-        <button class="searchSubmit" type="submit">
-            <i class="fa fa-search"></i>
-        </button>
-    </form>
-    <a class="sign" href="logout">Déconnexion</a>
-    <a class="sign" href="profile">Profil</a>
-    <%
-    } else {
-    %>
-    <a class="sign" href="inscription">Inscription</a>
-    <a class="sign" href="../WEB-INF/login.jsp">Connexion</a>
-    <%
-        }
-    %>
+    <div class="topnav">
+        <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+        <a href="../index.jsp">Accueil</a>
+        <a href="tendances">Tendances</a>
 
-</div>
+        <%
+            if(request.getSession().getAttribute("email")!=null){
+        %>
+        <form class="search-container" method="get" action="search">
+            <input name="s" class="searchBar" type="text" placeholder="Rechercher">
+            <button class="searchSubmit" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+        <a class="sign" href="logout">Déconnexion</a>
+        <a class="sign" href="profile">Profil</a>
+        <%
+        } else {
+        %>
+        <a class="sign" href="inscription">Inscription</a>
+        <a class="sign" href="login">Connexion</a>
+        <%
+            }
+        %>
+
+    </div>
 
     <%
         int i;

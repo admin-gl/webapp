@@ -1,0 +1,38 @@
+.resultats{
+    margin: 0 300px 0 300px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 20px;
+}
+
+.resultats h2 {
+    text-align: center;
+}
+
+.resultats h2, .resultats h4, .resultats h6{
+    font-family: Rubik;
+    color : white;
+}
+
+.resultats p {
+    font-family: Rubik;
+    font-size: 13px;
+    margin-top: 0;
+    color : white;
+}
+
+.resultats .album {
+    display: flex;
+}
+
+.resultats .music {
+    display: flex;
+}
+
+.resultats .informations {
+    margin-left: 6px;
+}
+
+.resultats li:hover{
+    background-color: rgba(45,13, 80, 0.5)!important;
+}

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<link href="css/home.css" rel="stylesheet" type="text/css">
+<link href="css/common.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
 <link href="css/searchEngin.css" rel="stylesheet" type="text/css">
+<link href="css/home.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <html>
     <head>
@@ -48,7 +49,7 @@
         <script src="particles.js-master/app.js"></script>
 
         <footer class="bottom-nav">
-            <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+            <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
         </footer>
 
     </body>

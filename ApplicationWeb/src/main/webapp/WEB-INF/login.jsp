@@ -3,6 +3,7 @@
 <link href="../css/login.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <html>
     <head>
         <title>Login</title>
