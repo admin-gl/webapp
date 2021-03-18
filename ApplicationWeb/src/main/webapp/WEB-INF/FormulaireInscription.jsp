@@ -16,7 +16,7 @@
         <div class="topnav">
             <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="../index.jsp">Accueil</a>
-            <a href="news">Tendances</a>
+            <a href="tendances">Tendances</a>
         </div>
 
         <div class="box">

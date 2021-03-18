@@ -40,7 +40,7 @@
 
         </div>
 
-        <h1 style="font-size:11vw">L'illimité, à <br>&emsp; portée de clic</h1>
+        <h1 style="font-size:11vw">Un univers <br>&emsp;&emsp; de musique</h1>
 
 
         <div id="particles-js"></div>
@@ -53,7 +53,7 @@
                     request.getSession().getAttribute("admin").equals("1")){
         %>
         <footer class="bottom-nav">
-            <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+            <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="admin" style="
         float: right;
         font-family:Rubik ;

@@ -37,12 +37,14 @@
     text-align: center;
     color: white;
     margin: 2px;
+    font-family: Rubik;
 }
 
 .player h5 {
     text-align: center;
     color: white;
     margin: 2px;
+    font-family: Rubik;
 }
 
 #audio-player-container button {

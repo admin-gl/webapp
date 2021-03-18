@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="topnav">
-        <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
-        <a href="index.jsp">Accueil</a>
-        <a href="news">Nouveautés</a>
+        <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+        <a href="../index.jsp">Accueil</a>
+        <a href="tendances">Nouveautés</a>
 
         <%
             if(request.getSession().getAttribute("email")!=null){
@@ -30,8 +30,8 @@
     </div>
     <div id="particles-js"></div>
 
-    <script src="particles.js-master/particles.js"></script>
-    <script src="particles.js-master/app.js"></script>
+    <script src="../particles.js-master/particles.js"></script>
+    <script src="../particles.js-master/app.js"></script>
 
     <div class="box">
         <form action="admin" method="post">

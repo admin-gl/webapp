@@ -85,9 +85,10 @@ public final class InscriptionFormulaire {
         } catch ( Exception e ) {
             setErreur( CHAMP_ADRESSE, e.getMessage() );
         }
-        adresse.replaceAll("'", "\'");
-        utilisateur.setAdressefacturation(adresse);
-
+        if(adresse != null) {
+            adresse.replaceAll("'", "\'");
+            utilisateur.setAdressefacturation(adresse);
+        }
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'inscription.";
             resultat = resultat + utilisateur.AddUser();
