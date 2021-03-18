@@ -13,11 +13,15 @@
         <div class="topnav">
             <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="index.jsp">Accueil</a>
-            <a href="news">Nouveautés</a>
+            <a href="news">Tendances</a>
 
             <%
                 if(request.getSession().getAttribute("email")!=null){
             %>
+            <form class="searchform" method="post" action="search">
+                <input name="searched" class="searchBar" type="text" placeholder="Entrez votre recherche">
+                <input class="searchSubmit" type="submit">
+            </form>
             <a class="sign" href="logout">Déconnexion</a>
             <a class="sign" href="profile">Profil</a>
             <%

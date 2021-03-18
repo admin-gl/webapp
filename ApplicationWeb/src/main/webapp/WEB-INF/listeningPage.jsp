@@ -35,9 +35,9 @@
 	<body onload="init()">
 
 	<div class="topnav">
-		<img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
-		<a href="index.jsp">Accueil</a>
-		<a href="news">Nouveautés</a>
+		<img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+		<a href="../index.jsp">Accueil</a>
+		<a href="tendances">Tendances</a>
 
 		<%
 			if(request.getSession().getAttribute("email")!=null){
@@ -47,6 +47,10 @@
 		<%
 		} else {
 		%>
+		<form class="searchform" method="post" action="search">
+			<input name="searched" class="searchBar" type="text" placeholder="Entrez votre recherche">
+			<input class="searchSubmit" type="submit">
+		</form>
 		<a class="sign" href="inscription">Inscription</a>
 		<a class="sign" href="login">Connexion</a>
 		<%
@@ -56,7 +60,7 @@
 	</div>
 
 		<div class="player">
-			<a href="/album?id=<%=idAlbum%>">
+			<a href="${pageContext.request.contextPath}/album?id=<%=idAlbum%>">
 				<img src="<%=imgPath%>" alt=" ">
 			</a>
 
@@ -103,15 +107,15 @@
 
 		<div id="scrollSuggested">
 			<%
-				for(int k = 0; k< suggested.length; k++){
-					String idA = suggested[k].getId();
-					String titleA = suggested[k].getTitle();
-					String pathPochetteA = "/music/"+titleA+"/cover.jpg";
-					%>
-					<a href="album?id=<%=idA%>" class="pochette">
-						<img src="<%=pathPochetteA%>" alt=" " style="width:170px;height:170px;">
-					</a>
-					<%
+				for (PochetteAlbum pochetteAlbum : suggested) {
+					String idA = pochetteAlbum.getId();
+					String titleA = pochetteAlbum.getTitle();
+					String pathPochetteA = "/music/" + titleA + "/cover.jpg";
+			%>
+			<a href="album?id=<%=idA%>" class="pochette">
+				<img src="<%=pathPochetteA%>" alt=" " style="width:170px;height:170px;">
+			</a>
+			<%
 				}
 			%>
 		</div>

@@ -1,9 +1,10 @@
 package com.voidapp.ApplicationWeb.bdd;
 
+import com.voidapp.ApplicationWeb.Musique.Album;
 import com.voidapp.ApplicationWeb.Musique.Musique;
 import com.voidapp.ApplicationWeb.compteUtilisateur.Utilisateur;
+import com.voidapp.ApplicationWeb.formulaire.SearchResult;
 
-import java.io.*;
 import java.sql.*;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class AccesBdd {
     public static Connection Connect() throws SQLException, ClassNotFoundException {
         properties = ResourceBundle.getBundle(resourceBundle);
             Class.forName(properties.getString("DB_DRIVER"));
-            Connection connexion = null;
+            Connection connexion;
             String url = properties.getString("JDBC_URL");
             String utilisateur = properties.getString("DB_LOGIN");
             String motDePasse = properties.getString("DB_PASSWORD");
@@ -49,7 +50,7 @@ public class AccesBdd {
 
             String requete="INSERT INTO Utilisateur (email,nom,prenom,mdp,adresse,dateadhesion,estadmin,civilite) VALUES ('"+user.getMail()+"','"+user.getNom()+"','"+user.getPrenom()+"','"+user.getMdp()+"','"+user.getAdressefacturation()+"','"+user.getDateadhesion()+"',false,'"+user.getCivilite()+"');";
 
-            int statut = statement.executeUpdate(requete);
+            statement.executeUpdate(requete);
 
         } catch (SQLException e) {
             message = message + "erreur dans la requete";
@@ -67,6 +68,7 @@ public class AccesBdd {
             ResultSet rs = ps.executeQuery();
             st = rs.next();
             rs.close();
+            ps.close();
             c.close();
 
         }
@@ -86,6 +88,9 @@ public class AccesBdd {
             while (rs.next()){
                 lname = rs.getString("nom");
             }
+            rs.close();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -103,7 +108,9 @@ public class AccesBdd {
             while (rs.next()){
                 lname = rs.getString("prenom");
             }
-
+            rs.close();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -123,6 +130,9 @@ public class AccesBdd {
             while (rs.next()){
                 i = rs.getInt(1);
             }
+            rs.close();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -132,22 +142,27 @@ public class AccesBdd {
     /*
      * permet d'obtenir les dux titres les plus aimés (à voir)
      */
-    public static int[] getTopTen(){
-        int top[]={-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+    public static int[][] getTopTen(){
+        int[] top = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
+        int[] nbLike = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
         int k=0;
         try {
-            Connection c =  Connect();
-            PreparedStatement ps = c.prepareStatement("select top 10 * from musique;");
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("select id_musique, count(id_utilisateur) as nbLike from likes group by id_musique order by nbLike desc limit 10;");
             ResultSet rs =ps.executeQuery();
             while (rs.next()){
-                top[k] = rs.getInt(1);
+                top[k] = rs.getInt("id_musique");
+                nbLike[k] = rs.getInt("nbLike");
                 k++;
             }
+            rs.close();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
         }
-        return top;
+        return new int[][]{top,nbLike};
     }
 
     public static int getNbSongsAlbum(String id){
@@ -160,7 +175,9 @@ public class AccesBdd {
             while (rs.next()){
                 n = rs.getString(1);
             }
-
+            rs.close();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -180,6 +197,9 @@ public class AccesBdd {
                 titles[k] = new Musique(rs.getString("id"),rs.getString("nom"));
                 k++;
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -196,6 +216,8 @@ public class AccesBdd {
             ps.setString(1, newemail);
             ps.setString(2, oldemail);
             ps.executeUpdate();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -208,6 +230,8 @@ public class AccesBdd {
             ps.setString(1, Hasher.encode(newmdp));
             ps.setString(2, email);
             ps.executeUpdate();
+            ps.close();
+            c.close();
         }
         catch(Exception e) {
             e.printStackTrace();
@@ -224,6 +248,9 @@ public class AccesBdd {
             while (rs.next()){
                 title = rs.getString("nom");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -242,6 +269,9 @@ public class AccesBdd {
             while (rs.next()){
                 artist = rs.getString("artiste");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -260,6 +290,9 @@ public class AccesBdd {
             while (rs.next()){
                 album = rs.getString("titre");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -278,6 +311,9 @@ public class AccesBdd {
             while (rs.next()){
                 idA = rs.getInt("id");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -296,6 +332,9 @@ public class AccesBdd {
             while (rs.next()){
                 titleA = rs.getString("titre");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -316,6 +355,9 @@ public class AccesBdd {
                 suggested[i] = rs.getString("id");
                 i++;
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -334,6 +376,9 @@ public class AccesBdd {
             while (rs.next()){
                 i = rs.getInt("nbSim");
             }
+            rs.close();
+            ps.close();
+            c.close();
 
         }
         catch(Exception e) {
@@ -382,6 +427,52 @@ public class AccesBdd {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public static SearchResult search(String searched){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps1 = c.prepareStatement("select * from musique where artiste like ? or nom like ? union select * from musique where artiste sounds like ? or nom sounds like ?;");
+            ps1.setString(1, "%"+searched+"%");
+            ps1.setString(2, "%"+searched+"%");
+            ps1.setString(3, searched);
+            ps1.setString(4, searched);
+            ResultSet rs1 = ps1.executeQuery();
+            ArrayList<Musique> tempMus = new ArrayList<>();
+            while(rs1.next()){
+                Musique music = new Musique();
+                music.setId(rs1.getInt("id")+"");
+                music.setAuthor(rs1.getString("artiste"));
+                music.setTitle(rs1.getString("nom"));
+                tempMus.add(music);
+            }
+            rs1.close();
+            ps1.close();
+
+            PreparedStatement ps2 = c.prepareStatement("select * from album where artiste like ? or titre like ? union select * from album where artiste sounds like ? or titre sounds like ?;");
+            ps2.setString(1, "%"+searched+"%");
+            ps2.setString(2, "%"+searched+"%");
+            ps2.setString(3, searched);
+            ps2.setString(4, searched);
+            ResultSet rs2 = ps2.executeQuery();
+            ArrayList<Album> tempAlbum = new ArrayList<>();
+            while(rs2.next()){
+                Album album = new Album();
+                album.setId(rs2.getInt("id")+ "");
+                album.setArtiste(rs2.getString("artiste"));
+                album.setStyle(rs2.getString("style"));
+                album.setTitre(rs2.getString("titre"));
+                tempAlbum.add(album);
+            }
+            rs2.close();
+            ps2.close();
+            c.close();
+
+            return new SearchResult(tempMus.toArray(new Musique[0]), tempAlbum.toArray(new Album[0]));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new SearchResult(new Musique[0], new Album[0]);
     }
 
     /*
