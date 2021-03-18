@@ -1,5 +1,4 @@
 <%@page import="com.voidapp.ApplicationWeb.Musique.Musique"%>
-<%@ page import="com.voidapp.ApplicationWeb.Musique.PochetteAlbum" %>
 <%
     String idAlb = request.getParameter("idAlb");
     String titleAlbum = (String) request.getAttribute("titleAlbum");
@@ -13,6 +12,7 @@
       href="https://fonts.googleapis.com/css?family=Rubik">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="../css/searchEngin.css" rel="stylesheet" type="text/css">
 
 <html>
 <head>
@@ -22,9 +22,9 @@
 <body onload="init()">
 
 <div class="topnav">
-    <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
-    <a href="index.jsp">Accueil</a>
-    <a href="news">Tendances</a>
+    <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
+    <a href="../index.jsp">Accueil</a>
+    <a href="tendances">Tendances</a>
 
     <%
         if(request.getSession().getAttribute("email")!=null){
@@ -34,9 +34,11 @@
     <%
     } else {
     %>
-    <form class="searchform" method="post" action="search">
-        <input name="searched" class="searchBar" type="text" placeholder="Entrez votre recherche">
-        <input class="searchSubmit" type="submit">
+    <form class="search-container" method="get" action="search">
+        <input name="s" class="searchBar" type="text" placeholder="Rechercher">
+        <button class="searchSubmit" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
     </form>
     <a class="sign" href="inscription">Inscription</a>
     <a class="sign" href="login">Connexion</a>

@@ -22,6 +22,7 @@
 	  href="https://fonts.googleapis.com/css?family=Rubik">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="../css/searchEngin.css" rel="stylesheet" type="text/css">
 
 <script src="../js-player/lottie.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="text/javascript"></script>
@@ -42,15 +43,17 @@
 		<%
 			if(request.getSession().getAttribute("email")!=null){
 		%>
+		<form class="search-container" method="get" action="search">
+			<input name="s" class="searchBar" type="text" placeholder="Rechercher">
+			<button class="searchSubmit" type="submit">
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
 		<a class="sign" href="logout">Déconnexion</a>
 		<a class="sign" href="profile">Profil</a>
 		<%
 		} else {
 		%>
-		<form class="searchform" method="post" action="search">
-			<input name="searched" class="searchBar" type="text" placeholder="Entrez votre recherche">
-			<input class="searchSubmit" type="submit">
-		</form>
 		<a class="sign" href="inscription">Inscription</a>
 		<a class="sign" href="login">Connexion</a>
 		<%

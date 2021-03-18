@@ -116,7 +116,7 @@ div.topnav
     margin: 2px;
 }
 
-button {
+#audio-player-container button {
     padding: 0;
     border: 0;
     background: transparent;

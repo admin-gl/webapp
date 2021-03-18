@@ -3,6 +3,8 @@
 <link href="css/home.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
+<link href="css/searchEngin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <html>
     <head>
         <title>Home</title>
@@ -13,14 +15,16 @@
         <div class="topnav">
             <img src="logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="index.jsp">Accueil</a>
-            <a href="news">Tendances</a>
+            <a href="tendances">Tendances</a>
 
             <%
                 if(request.getSession().getAttribute("email")!=null){
             %>
-            <form class="searchform" method="post" action="search">
-                <input name="searched" class="searchBar" type="text" placeholder="Entrez votre recherche">
-                <input class="searchSubmit" type="submit">
+            <form class="search-container" method="get" action="search">
+                <input name="s" class="searchBar" type="text" placeholder="Rechercher">
+                <button class="searchSubmit" type="submit">
+                    <i class="fa fa-search"></i>
+                    </button>
             </form>
             <a class="sign" href="logout">Déconnexion</a>
             <a class="sign" href="profile">Profil</a>

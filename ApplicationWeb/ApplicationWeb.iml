@@ -47,5 +47,6 @@
     <orderEntry type="library" name="lottie-web" level="application" />
     <orderEntry type="library" name="zxcvbn" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
+    <orderEntry type="library" name="w3" level="application" />
   </component>
 </module>

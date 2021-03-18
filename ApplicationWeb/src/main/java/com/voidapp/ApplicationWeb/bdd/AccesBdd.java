@@ -444,6 +444,7 @@ public class AccesBdd {
                 music.setId(rs1.getInt("id")+"");
                 music.setAuthor(rs1.getString("artiste"));
                 music.setTitle(rs1.getString("nom"));
+                music.setImgPath("/music/"+ getAlbumFromSongId(music.getId()) + "/cover.jpg");
                 tempMus.add(music);
             }
             rs1.close();
