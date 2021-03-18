@@ -4,15 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>GestionTestJDBC</servlet-name>
-        <servlet-class>com.voidapp.ApplicationWeb.servlets.GestionTestJDBC</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>GestionTestJDBC</servlet-name>
-        <url-pattern>/testjdbc</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>Inscription</servlet-name>
@@ -46,13 +37,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>News</servlet-name>
-        <servlet-class>com.voidapp.ApplicationWeb.servlets.News</servlet-class>
+        <servlet-name>Tendances</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.Tendances</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>News</servlet-name>
-        <url-pattern>/news</url-pattern>
+        <servlet-name>Tendances</servlet-name>
+        <url-pattern>/tendances</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -105,5 +96,17 @@
         <url-pattern>/like</url-pattern>
     </servlet-mapping>
 
+<<<<<<< HEAD
+=======
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.SearchServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+>>>>>>> main
 
 </web-app>

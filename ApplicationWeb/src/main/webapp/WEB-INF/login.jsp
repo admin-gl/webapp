@@ -3,6 +3,7 @@
 <link href="../css/login.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Rubik">
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <html>
     <head>
         <title>Login</title>
@@ -12,7 +13,7 @@
         <div class="topnav">
             <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
             <a href="../index.jsp">Accueil</a>
-            <a href="news">Nouveautés</a>
+            <a href="news">Tendances</a>
         </div>
 
         <div class="box">
@@ -20,7 +21,7 @@
                 <h1>Connectez-vous</h1>
                 <input type="text" name="email" placeholder="e-mail"><br>
                 <input type="password" name="password" placeholder="mot de passe"><br>
-                <button type="submit">Connection</button>
+                <button type="submit">Connexion</button>
                 <p>pas encore membre ? <span onclick="window.location.href='inscription'">crééez-vous un compte</span></p>
             </form>
         </div>

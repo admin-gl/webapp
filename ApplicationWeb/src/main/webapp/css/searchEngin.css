@@ -1,0 +1,29 @@
+.topnav .search-container {
+    float:left;
+    margin-left: 25%;
+
+}
+
+.topnav input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    background: #150a11;
+    color : white;
+}
+
+.topnav .search-container button {
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #150a11;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    color : white;
+}
+
+.topnav .search-container button:hover {
+    background: #450d80;
+}

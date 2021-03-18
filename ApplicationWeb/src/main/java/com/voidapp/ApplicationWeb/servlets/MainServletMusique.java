@@ -4,14 +4,14 @@ import com.voidapp.ApplicationWeb.Musique.Musique;
 import com.voidapp.ApplicationWeb.Musique.PochetteAlbum;
 import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class MainServletMusique extends HttpServlet {
 
@@ -19,8 +19,6 @@ public class MainServletMusique extends HttpServlet {
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) {
 
-
-		Musique music = new Musique();
 		String id = request.getParameter("id");
 
 		String album = AccesBdd.getAlbumFromSongId(id);
@@ -32,7 +30,6 @@ public class MainServletMusique extends HttpServlet {
 		int idAlbum = AccesBdd.getAlbumIdFromAlbumTitle(album);
 		PochetteAlbum[] SuggestedAlbums = new PochetteAlbum[nbSim];
 		//les id des albums de même style
-		System.out.println("idAlb = "+idAlbum);
 		String[] suggested = AccesBdd.getSimilarAlbum(id,nbSim);
 
 		for (int k=0;k<nbSim;k++){
@@ -45,9 +42,8 @@ public class MainServletMusique extends HttpServlet {
 
 		/* cette partie de code était dédiée à la récupération des blobs de musique/image sotckées en ligne
 		* c'était fonctionnel jusqu'au moment ou les serveurs d'OVH ont pris feu
-		* on a alors décidé de faire les choses plus simplement, avec des données en local */
+		* on a alors décidé de faire les choses plus simplement, avec des données en local
 
-		/*
 		if (id != null && !id.contentEquals("")) {
 			File musFile = new File(getServletContext().getRealPath("/") + "/music/music.wav");
 			File imgFile = new File(getServletContext().getRealPath("/") + "music/img.png");
@@ -55,6 +51,7 @@ public class MainServletMusique extends HttpServlet {
 				if (!musFile.exists()) {
 					musFile.createNewFile();
 				}
+
 				if(!imgFile.exists()){
 					imgFile.createNewFile();
 				}
@@ -62,20 +59,34 @@ public class MainServletMusique extends HttpServlet {
 			} catch (IOException e ){
 				e.printStackTrace();
 			}
+
 			music = AccesBdd.readMusic(Integer.parseInt(id), new File(getServletContext().getRealPath("/") + "/music/music.wav"), new File(getServletContext().getRealPath("/") + "music/img.png"));
+
 		}
 
 		 */
 
-		music = new Musique(id, titre, "mp3", artist, "/music/"+album+"/"+titre+".mp3", "/music/"+album+"/cover.jpg");
+		Musique music = new Musique(id, titre, "mp3", artist, "/music/"+album+"/"+titre+".mp3", "/music/"+album+"/cover.jpg");
 
         request.setAttribute("music", music);
         request.setAttribute("suggested", SuggestedAlbums);
 		request.setAttribute("idAlbum", idAlbum);
 		String titleA = SuggestedAlbums[0].getTitle();
         System.out.println("/music/"+titleA+"/cover.jpg");
-
-
+        System.out.println(music.getMusPath());
+		HttpSession session = request.getSession();
+        if(session.getAttribute("email") != null){
+        	session.setAttribute("idMusique", music.getId());
+			ArrayList<Integer> temp = (ArrayList<Integer>) session.getAttribute("likes");
+			System.out.println(temp.contains(Integer.parseInt(id)));
+			if(temp.contains(Integer.parseInt(id))){
+				request.setAttribute("liked", "1");
+			} else {
+				request.setAttribute("liked", "0");
+			}
+		} else {
+			request.setAttribute("liked", "0");
+		}
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
 

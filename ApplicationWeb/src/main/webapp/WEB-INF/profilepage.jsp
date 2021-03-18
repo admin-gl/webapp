@@ -8,14 +8,23 @@
     <meta charset="utf-8" />
     <title>Inscription</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="../css/searchEngin.css" rel="stylesheet" type="text/css">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <div class="topnav">
     <img src="../logos/planet_void_white_alpha.png" alt=" " style="width:70px;height:70px;">
     <a href="../index.jsp">Accueil</a>
-    <a href="news">Nouveautés</a>
-    <a class="sign" href="logout">Déconnection</a>
+    <a href="news">Tendances</a>
+    <form class="search-container" method="get" action="search">
+        <input name="s" class="searchBar" type="text" placeholder="Rechercher">
+        <button class="searchSubmit" type="submit">
+            <i class="fa fa-search"></i>
+        </button>
+    </form>
+    <a class="sign" href="logout">Déconnexion</a>
 </div>
 
 <div class="box">

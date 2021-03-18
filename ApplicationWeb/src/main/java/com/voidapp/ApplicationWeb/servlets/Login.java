@@ -4,6 +4,8 @@ import com.voidapp.ApplicationWeb.bdd.AccesBdd;
 import com.voidapp.ApplicationWeb.bdd.Hasher;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,14 +27,16 @@ public class Login extends HttpServlet {
         response.setContentType("text/html");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String fname = AccesBdd.getFName(email);
-        String lname = AccesBdd.getLName(email);
 
         if(AccesBdd.checkUser(email, Hasher.encode(password))) {
+            String fname = AccesBdd.getFName(email);
+            String lname = AccesBdd.getLName(email);
+            ArrayList<Integer> likes = AccesBdd.getLikes(email);
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
             session.setAttribute("prenom", fname);
             session.setAttribute("nom", lname);
+            session.setAttribute("likes", likes);
             request.getRequestDispatcher(HOME).forward(request, response);
         } else {
             request.getRequestDispatcher(THIS).forward(request, response);
