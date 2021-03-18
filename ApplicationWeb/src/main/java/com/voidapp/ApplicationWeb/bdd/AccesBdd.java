@@ -429,14 +429,18 @@ public class AccesBdd {
         return new ArrayList<>();
     }
 
-    public static SearchResult search(String searched){
+    public static SearchResult search(String searched, int page){
         try{
             Connection c = Connect();
-            PreparedStatement ps1 = c.prepareStatement("select * from musique where artiste like ? or nom like ? union select * from musique where artiste sounds like ? or nom sounds like ?;");
+            int limit = 5;
+            int offset = (5 * page);
+            PreparedStatement ps1 = c.prepareStatement("(select * from musique where artiste like ? or nom like ? union select * from musique where artiste sounds like ? or nom sounds like ?) limit ? offset ?;");
             ps1.setString(1, "%"+searched+"%");
             ps1.setString(2, "%"+searched+"%");
             ps1.setString(3, searched);
             ps1.setString(4, searched);
+            ps1.setInt(5, limit);
+            ps1.setInt(6, offset);
             ResultSet rs1 = ps1.executeQuery();
             ArrayList<Musique> tempMus = new ArrayList<>();
             while(rs1.next()){
@@ -450,11 +454,13 @@ public class AccesBdd {
             rs1.close();
             ps1.close();
 
-            PreparedStatement ps2 = c.prepareStatement("select * from album where artiste like ? or titre like ? union select * from album where artiste sounds like ? or titre sounds like ?;");
+            PreparedStatement ps2 = c.prepareStatement("(select * from album where artiste like ? or titre like ? union select * from album where artiste sounds like ? or titre sounds like ?) limit ? offset ?;");
             ps2.setString(1, "%"+searched+"%");
             ps2.setString(2, "%"+searched+"%");
             ps2.setString(3, searched);
             ps2.setString(4, searched);
+            ps2.setInt(5, limit);
+            ps2.setInt(6, offset);
             ResultSet rs2 = ps2.executeQuery();
             ArrayList<Album> tempAlbum = new ArrayList<>();
             while(rs2.next()){

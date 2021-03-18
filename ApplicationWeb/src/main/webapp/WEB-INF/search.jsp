@@ -4,10 +4,16 @@
 <%
     Album[] albums = (Album[]) request.getAttribute("albums");
     Musique[] musiques = (Musique[]) request.getAttribute("musiques");
+    String numPage = request.getParameter("page");
+    if(numPage == null){
+        numPage = "1";
+    }
+    String s = request.getParameter("s");
+
 %>
 <html>
 <head>
-    <title>Recherche</title>
+    <title>Recherche - Page <%=numPage%></title>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Rubik">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -46,8 +52,13 @@
 
 <div class="resultats">
     <ul class="w3-ul w3-hoverable">
-        <h2>Albums</h2>
         <%
+            if(albums.length > 0){
+
+        %>
+                <h2>Albums</h2>
+        <%
+            }
             for (Album album : albums) {
                 String pathCover = "/music/" + album.getTitre() + "/cover.jpg";
                 String t = album.getTitre();
@@ -66,9 +77,11 @@
 
         <%
             }
+            if(musiques.length > 0){
         %>
         <h2>Morceaux</h2>
         <%
+            }
             for (Musique musique : musiques) {
                 String t = musique.getTitle();
                 String art = musique.getAuthor();
@@ -87,6 +100,38 @@
         %>
     </ul>
 </div>
+
+<div id="navigation-arrows">
+    <%
+        if(!numPage.equals("1")) {
+    %>
+    <svg id="left-arrow" onclick="window.location.href='search?s=<%=s%>&page=<%=Integer.parseInt(numPage)-1%>'" viewBox="0 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="prev" transform="translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)">
+            <polygon class="arrow" points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"></polygon>
+            <polygon class="arrow-fixed" points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"></polygon>
+            <path d="M-1.48029737e-15,0.56157424 L-1.48029737e-15,16.1929159 L9.708,8.33860465 L-2.66453526e-15,0.56157424 L-1.48029737e-15,0.56157424 Z M1.33333333,3.30246869 L7.62533333,8.34246869 L1.33333333,13.4327013 L1.33333333,3.30246869 L1.33333333,3.30246869 Z"></path>
+        </g>
+    </svg>
+    <%
+        }
+    %>
+        <p id="numPage"><%=numPage%></p>
+    <%
+        if(albums.length == 5 || musiques.length == 5){
+    %>
+
+    <svg id="right-arrow" onclick="window.location.href='search?s=<%=s%>&page=<%=Integer.parseInt(numPage)+1%>'" width="18px" height="17px" viewBox="-1 0 18 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g>
+            <polygon class="arrow" points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"></polygon>
+            <polygon class="arrow-fixed" points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"></polygon>
+            <path d="M-4.58892184e-16,0.56157424 L-4.58892184e-16,16.1929159 L9.708,8.33860465 L-1.64313008e-15,0.56157424 L-4.58892184e-16,0.56157424 Z M1.33333333,3.30246869 L7.62533333,8.34246869 L1.33333333,13.4327013 L1.33333333,3.30246869 L1.33333333,3.30246869 Z"></path>
+        </g>
+    </svg>
+    <%
+        }
+    %>
+</div>
+
 <div style="height: 100px"></div>
 <div id="particles-js"></div>
 

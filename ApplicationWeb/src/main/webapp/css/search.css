@@ -36,3 +36,36 @@
 .resultats li:hover{
     background-color: rgba(45,13, 80, 0.5)!important;
 }
+
+#navigation-arrows{
+    display: flex;
+    justify-content: center;
+}
+
+#left-arrow{
+    fill: #450d80;
+    width: 50px;
+    height: 48px;
+}
+
+#left-arrow:hover{
+    fill: #501eca;
+}
+
+#numPage{
+    color :white;
+    font-family: Rubik;
+    font-size: 30px;
+    margin: 5px 6px 30px 6px;
+
+}
+
+#right-arrow{
+    fill: #450d80;
+    width: 50px;
+    height: 48px;
+}
+
+#right-arrow:hover{
+    fill : #501eca;
+}

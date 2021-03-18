@@ -19,10 +19,17 @@ public class SearchServlet extends HttpServlet {
         if(searched == null){
             searched = request.getParameter("searched");
         }
-        SearchResult res = AccesBdd.search(searched);
+        String valuePage = request.getParameter("page");
+        int page;
+        if(valuePage == null){
+            page = 1;
+        } else {
+            page = Integer.parseInt(valuePage);
+        }
+        SearchResult res = AccesBdd.search(searched, page-1);
         request.setAttribute("albums", res.albums);
         request.setAttribute("musiques", res.musiques);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName + "?s="+ searched);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName);
 
         try {
             rd.forward(request, response);
