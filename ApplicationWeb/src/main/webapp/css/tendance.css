@@ -1,0 +1,70 @@
+.top10 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    align-items: baseline;
+    margin-left:125px;
+    margin-right: 125px;
+}
+
+#classement-info-container {
+    display: flex;
+    margin: 6px 10px 6px 10px;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#classement-info-container:hover{
+    background-color: rgba(45,13, 80, 0.5);
+}
+
+#classement-info-container h1{
+    color : white;
+    font-family: Rubik;
+    margin-right: 6px;
+    margin-left: 6px;
+}
+
+#info-container {
+    display: flex;
+}
+
+#info-container img{
+    width: 300px;
+    height: 300px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#informations{
+    margin-left: 6px;
+    width: 350px;
+}
+
+#informations h4{
+    color : white;
+    font-family: Rubik;
+    font-size: 40px;
+}
+#informations h6{
+    color : white;
+    font-family: Rubik;
+    font-size: 20px;
+}
+#likes{
+    margin-top: 129px;
+}
+.fa-heart {
+    -webkit-text-stroke: 2px rgb(127, 0, 181);
+    color: rgb(127, 0, 181);
+}
+#likes i {
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 10px;
+}
+#likes p{
+    color : white;
+    font-family: Rubik;
+}

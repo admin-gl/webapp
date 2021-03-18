@@ -65,7 +65,7 @@
 
 		<div class="player">
 			<a href="${pageContext.request.contextPath}/album?id=<%=idAlbum%>">
-				<img src="<%=imgPath%>" alt=" ">
+				<img src="<%=imgPath%>" alt=" " onerror="this.onerror=null;this.src='../logos/planet_void_white_alpha.png'">
 			</a>
 
 
@@ -117,7 +117,7 @@
 					String pathPochetteA = "/music/" + titleA + "/cover.jpg";
 			%>
 			<a href="album?id=<%=idA%>" class="pochette">
-				<img src="<%=pathPochetteA%>" alt=" " style="width:170px;height:170px;">
+				<img src="<%=pathPochetteA%>" alt=" " style="backdrop-filter: blur(5px);width:170px;height:170px;" onerror="this.onerror=null;this.src='../logos/planet_void_white_alpha.png'">
 			</a>
 			<%
 				}

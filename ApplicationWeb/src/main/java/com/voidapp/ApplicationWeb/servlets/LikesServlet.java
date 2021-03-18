@@ -20,13 +20,13 @@ public class LikesServlet extends HttpServlet {
 
         AccesBdd.updateLikes(email, idMusique, liked);
         ArrayList<Integer> likes = (ArrayList<Integer>) session.getAttribute("likes");
-        System.out.println(likes);
+
         if(liked){
             likes.add(Integer.parseInt(idMusique));
         } else {
             likes.remove((Object) Integer.parseInt(idMusique));
         }
         session.setAttribute("likes", likes);
-        System.out.println(likes);
+
     }
 }

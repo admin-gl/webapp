@@ -30,7 +30,6 @@ public class MainServletMusique extends HttpServlet {
 		int idAlbum = AccesBdd.getAlbumIdFromAlbumTitle(album);
 		PochetteAlbum[] SuggestedAlbums = new PochetteAlbum[nbSim];
 		//les id des albums de même style
-		System.out.println("idAlb = "+idAlbum);
 		String[] suggested = AccesBdd.getSimilarAlbum(id,nbSim);
 
 		for (int k=0;k<nbSim;k++){

@@ -56,9 +56,7 @@ public class AlbumServlet extends HttpServlet {
 
         request.setAttribute("titleAlbum", titleAlbum);
         request.setAttribute("listeTitres", titles);
-        System.out.println("dans album servlet :"+titleAlbum);
-        System.out.println("dans album servlet :"+nbSong);
-        System.out.println("dans album servlet :"+ Arrays.toString(titles));
+
         RequestDispatcher rd = getServletContext().getRequestDispatcher(VIEW);
 
 

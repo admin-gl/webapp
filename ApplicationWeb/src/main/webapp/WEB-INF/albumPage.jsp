@@ -51,7 +51,7 @@
 
 <div class="container" >
     <div id="imageContainer">
-        <img src="/music/<%=titleAlbum%>/cover.jpg" alt=" " style="width:400px;height:400px;">
+        <img src="/music/<%=titleAlbum%>/cover.jpg" alt=" " style="width:400px;height:400px;" onerror="this.onerror=null;this.src='../logos/planet_void_white_alpha.png'">
     </div>
     <div id="songsContainer">
         <h3 style="font-size: x-large"><%=titleAlbum%></h3><br>

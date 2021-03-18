@@ -19,12 +19,9 @@ public class SearchServlet extends HttpServlet {
         if(searched == null){
             searched = request.getParameter("searched");
         }
-        System.out.println(searched);
         SearchResult res = AccesBdd.search(searched);
         request.setAttribute("albums", res.albums);
         request.setAttribute("musiques", res.musiques);
-        System.out.println(res.albums.length);
-        System.out.println(res.musiques.length);
         RequestDispatcher rd = getServletContext().getRequestDispatcher(pageName + "?s="+ searched);
 
         try {

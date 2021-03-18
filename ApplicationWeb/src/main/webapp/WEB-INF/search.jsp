@@ -4,7 +4,6 @@
 <%
     Album[] albums = (Album[]) request.getAttribute("albums");
     Musique[] musiques = (Musique[]) request.getAttribute("musiques");
-
 %>
 <html>
 <head>
