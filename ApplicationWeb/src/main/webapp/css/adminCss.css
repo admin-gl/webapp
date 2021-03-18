@@ -1,0 +1,260 @@
+body {
+    background-color:#150a11;
+}
+.css-selector {
+    font-family: 'Rubik';
+}
+p {
+    font-family:"Rubik";
+    color:white;
+    font-size:20px;
+}
+a {
+    font-family: "Rubik";
+    color:white
+}
+/* Add a black background color to the top navigation */
+/*div.topnav {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: black;
+    overflow: hidden;
+}*/
+div.topnav
+{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    padding: 6px;
+    background-color: black;
+    overflow: hidden;
+}
+
+.topnav img {
+    float:left;
+    margin:-10px 0;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    font-family: "Rubik";
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 18px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #00559f;
+    color: white;
+}
+
+.topnav a.sign {
+    float: right;
+    font-family: "Rubik";
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 18px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#particles-js canvas {
+    display: block;
+    vertical-align: bottom;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+    -webkit-transition: opacity .8s ease, -webkit-transform 1.4s ease;
+    transition: opacity .8s ease, transform 1.4s ease
+}
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -10;
+    top: 0;
+    left: 0
+}
+
+div.box{
+    width: auto;
+    height: auto;
+    position:center;
+    font-family:Rubik;
+    color:#fff;
+    padding-bottom: 6px;
+    display: flex;
+    justify-content: center;
+}
+
+.box form{
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.box h1{
+    text-align:center;
+    margin:15px 0;
+    font-size:30px;
+}
+
+.box p{
+    font-size:14px;
+    text-align:center;
+}
+.box p span{
+    cursor:pointer;
+    color: #501eca;
+}
+
+.box button{
+    background: #450d80;
+    border:0;
+    color:#fff;
+    padding:10px;
+    font-size:20px;
+    width:330px;
+    margin:20px auto;
+    display:block;
+    cursor:pointer;
+}
+.box button:active{
+    background: #501eca;
+}
+
+div.civ{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* custom radio button */
+@keyframes click-wave {
+    0% {
+        height:20px;
+        width: 20px;
+        opacity: 0.35;
+        position: relative;
+    }
+    100% {
+        height: 100px;
+        width: 100px;
+        margin-left: -40px;
+        margin-top: -40px;
+        opacity: 0;
+    }
+}
+
+.option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 5.66667px;
+    right: 0;
+    bottom: 0px;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+}
+.option-input:hover {
+    background: #9faab7;
+}
+.option-input:checked {
+    background: #501eca;
+}
+.option-input:checked::before {
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    content: '✔';
+    display: inline-block;
+    font-size: 13.33333px;
+    text-align: center;
+    line-height: 20px;
+}
+.option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: #501eca;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+}
+.option-input.radio {
+    border-radius: 50%;
+}
+.option-input.radio::after {
+    border-radius: 50%;
+}
+
+/* end custom radio button*/
+
+div.ps input{
+    margin-bottom: -0.5em;
+}
+
+
+
+div.in-box{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.in-box input{
+    display:block;
+    width:300px;
+    margin:20px auto;
+    padding:15px;
+    background:rgba(0,0,0,0.2);
+    color:#fff;
+    border:0;
+}
+.in-box input:focus,.in-box input:active,.in-box button:focus,.in-box button:active{
+    outline:none;
+}
+
+.in-box span{
+    font-size: 10px;
+    color: red;
+}
+
+footer.bottom-nav{
+    position: fixed;
+    bottom: 6px;
+    width: 99%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: black;
+    overflow: hidden;
+}
+.bottom-nav img {
+    float:left;
+    margin:-10px 0;
+}

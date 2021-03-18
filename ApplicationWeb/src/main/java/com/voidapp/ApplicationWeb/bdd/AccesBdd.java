@@ -238,6 +238,25 @@ public class AccesBdd {
         }
     }
 
+    public static String isAdmin(String email){
+        String adm ="";
+        try {
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("select estadmin from Utilisateur where email=?;");
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                adm = rs.getString("estadmin");
+            }
+            ps.close();
+            c.close();
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        return adm;
+    }
+
     public static String getTitle(String id){
         String title = "";
         try {
@@ -387,6 +406,63 @@ public class AccesBdd {
         return i;
     }
 
+    public static void addSong(String titre, String artiste, String album, String style) {
+        int idA = -1;
+        int idS = -1;
+        try {
+            Connection c = Connect();
+            PreparedStatement albExist = c.prepareStatement("select id from album where titre=?");
+            PreparedStatement addS = c.prepareStatement("insert into musique(nom,artiste) values(?,?);");
+            PreparedStatement getSId = c.prepareStatement("select id from musique where nom=? and artiste=?;");
+            albExist.setString(1, album);
+            addS.setString(1, titre);
+            addS.setString(2, artiste);
+            getSId.setString(1, titre);
+            getSId.setString(2, artiste);
+            ResultSet rs = albExist.executeQuery();
+            addS.executeUpdate();
+            ResultSet rs3 = getSId.executeQuery();
+            while (rs.next()) {
+                idA = rs.getInt("id");
+            }
+            while (rs3.next()) {
+                idS = rs3.getInt("id");
+            }
+
+            System.out.println(idA + idS);
+            //si l'album existe déjà
+            if (idA != -1) {
+                if (idS != -1) {
+                    PreparedStatement addLink = c.prepareStatement("insert into linkerAlbMus values(?,?);");
+                    addLink.setString(1, "" + idA);
+                    addLink.setString(2, "" + idS);
+                    addLink.executeUpdate();
+                }
+                //si l'album n'existe pas
+            } else {
+                PreparedStatement addA = c.prepareStatement("insert into album(titre,artiste,style) values(?,?,?);");
+                PreparedStatement getAId = c.prepareStatement("select id from album where titre=? and artiste=?;");
+                addA.setString(1, album);
+                addA.setString(2, artiste);
+                addA.setString(3, style);
+                getAId.setString(1, album);
+                getAId.setString(2, artiste);
+                addA.executeUpdate();
+                ResultSet rs5 = getAId.executeQuery();
+                while (rs5.next()) {
+                    idA = rs5.getInt("id");
+                }
+                if (idS != -1) {
+                    PreparedStatement addLink = c.prepareStatement("insert into linkerAlbMus values(?,?);");
+                    addLink.setString(1, "" + idA);
+                    addLink.setString(2, "" + idS);
+                    addLink.executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public static void updateLikes(String email, String idMusique , boolean liked){
         try {
             Connection c = Connect();
@@ -480,6 +556,35 @@ public class AccesBdd {
             e.printStackTrace();
         }
         return new SearchResult(new Musique[0], new Album[0]);
+    }
+
+    public static void deleteSongId(String id){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("delete from musique where id=?;");
+            ps.setString(1, id);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateSong(String id, String newTitle){
+        try{
+            Connection c = Connect();
+            PreparedStatement ps = c.prepareStatement("update musique set nom=? where id=?;");
+            System.out.println(newTitle);
+            System.out.println(id);
+            ps.setString(1, newTitle);
+            ps.setString(2, id);
+            ps.executeUpdate();
+            ps.close();
+            c.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /*

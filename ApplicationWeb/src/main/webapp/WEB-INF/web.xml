@@ -33,7 +33,7 @@
 
     <servlet-mapping>
         <servlet-name>AjoutMusiqueServlet</servlet-name>
-        <url-pattern>/ajout</url-pattern>
+        <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -104,6 +104,26 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteSongServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.DeleteSongServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DeleteSongServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateSongServlet</servlet-name>
+        <servlet-class>com.voidapp.ApplicationWeb.servlets.UpdateSongServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UpdateSongServlet</servlet-name>
+        <url-pattern>/edit</url-pattern>
     </servlet-mapping>
 
 </web-app>
