@@ -12,7 +12,7 @@ The latest code is located on the main banch on https://github.com/admin-gl/weba
 #### To test the application : 
 - retrieve the App2.war (sorry about the name)  
 - copy it into the `webapps` tomcat directory  
-- start tomcat server eg `catalina start`
+- start tomcat server eg `catalina start` (macOS) or run directly `startup.sh` in the `bin` directory
 - open a web browser and enter the following url : `http://localhost:8080/App2`  
 - depending on the size of your screen, you might want to zoom out (ctrl -) as our app isn't responsive
-
+- hopefully enjoy !
